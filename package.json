@@ -1,0 +1,28 @@
+{
+  "name": "@ethernodeio/enapi",
+  "version": "1.0.0",
+  "description": "enAPI to intereact with the enOS system",
+  "main": "build/server.js",
+  "scripts": {
+    "start": "tsc && node build/server.js",
+    "build": "tsc",
+    "lint": "tslint --fix -p .",
+    "test": "npm run lint && jest --coverage",
+    "typings": "open-rpc-typings --output-ts __GENERATED_TYPES__"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@open-rpc/server-js": "^1.2.3",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@open-rpc/typings": "^1.4.2",
+    "@types/cors": "^2.8.5",
+    "@types/jest": "^24.0.13",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  }
+}

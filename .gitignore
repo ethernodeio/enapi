@@ -1,0 +1,8 @@
+node_modules
+coverage
+build
+docs
+.DS_Store
+dist
+__GENERATED_TYPES__
+/**/build
