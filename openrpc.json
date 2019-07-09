@@ -109,7 +109,7 @@
     },
     {
       "name": "login",
-      "description": "checks for user account and sets login variables and fetches session token.",
+      "description": "checks for user account and sets login variables and fetches JWT token.",
       "params": [
         {
           "$ref": "#/components/contentDescriptors/userName"
@@ -120,7 +120,7 @@
       ],
       "result": {
         "name": "login",
-        "description": "Success, you will also receive an auth token, that has to be send with every api call afterwards ",
+        "description": "Success, you will also receive an JWT token, that has to be send in the header with every api call afterwards ",
         "schema": {
           "type": "object",
           "properties": {
@@ -203,8 +203,16 @@
     },
     {
       "name": "getUser",
-      "description": "Gets user info if passed user matches. Include auth token form login in header.",
+      "description": "Gets user info if passed user matches. Include JWT token in header.",
       "params": [
+        {
+          "name": "token",
+          "description": "JWT Token needed with this call gained on login",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
         {
           "$ref": "#/components/contentDescriptors/userName"
         }
@@ -546,6 +554,45 @@
       ]
     },
     {
+      "name": "sol_compile",
+      "description": "Compile smart contract written in Solidity into bytecode for Ethereum based blockchain",
+      "params": [
+        {
+          "name": "solVersion",
+          "description": "Version of solidity to compile with, please make sure the Blokchain netowrk is compatible with your chosen version of Solidity.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "solCode",
+          "description": "Solidity code to be compiled into bytecode",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "sol_compile",
+        "description": "Returns solidity code in bytecode, warnings and other params. Return whole code with 0 spaces and whitespace",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns: 'success'"
+            },
+            "message": {
+              "type": "string",
+              "description": "Returns solidity code in bytecode, warnings and other params"
+            }
+          }
+        }
+      }
+    },
+    {
       "name": "web3_clientVersion",
       "description": "Returns the current client version.",
       "params": [
@@ -560,7 +607,7 @@
         },
         {
           "name": "method",
-          "description": "method being called, web3_clientVersion",
+          "description": "ETH RPC method being called, web3_clientVersion",
           "required": true,
           "schema": {
             "type": "string"
