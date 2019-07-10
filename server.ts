@@ -10,7 +10,7 @@ import { sol_compile } from "./methods/solidityMethods";
 import { web3_clientVersion } from "./methods/ethrpcMethods";
 import mongoose from "mongoose";
 
-console.log(mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true }));
+mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true });
 
 const methods = {
   createUser,

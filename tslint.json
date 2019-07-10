@@ -5,6 +5,9 @@
   "rules": {
     "ordered-imports": false,
     "object-literal-sort-keys": false,
+    "max-line-length": false,
+    "prefer-const": false,
+    "no-var-keyword": false,
     "no-console": [
       false
     ],

@@ -203,15 +203,10 @@
     },
     {
       "name": "getUser",
-      "description": "Gets user info if passed user matches. Include JWT token in header.",
+      "description": "Gets user info if passed user matches. Include JWT token as param0.",
       "params": [
         {
-          "name": "token",
-          "description": "JWT Token needed with this call gained on login",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
+          "$ref": "#/components/contentDescriptors/JWTtoken"
         },
         {
           "$ref": "#/components/contentDescriptors/userName"
@@ -303,6 +298,9 @@
       "description": "Spin up a docker container with node settings specified in the dashboard. Include auth token form login in header.",
       "params": [
         {
+          "$ref": "#/components/contentDescriptors/JWTtoken"
+        },
+        {
           "$ref": "#/components/contentDescriptors/userName"
         },
         {
@@ -313,6 +311,12 @@
         },
         {
           "$ref": "#/components/contentDescriptors/syncType"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/rpcApi"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/wsApi"
         }
       ],
       "result": {
@@ -836,6 +840,14 @@
           "type": "string"
         }
       },
+      "JWTtoken": {
+        "name": "JWTtoken",
+        "description": "JWT Token needed with this call gained on login",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "containerId": {
         "name": "containerId",
         "description": "docker container ID, returned with getUser method",
@@ -872,13 +884,22 @@
           "type": "string"
         }
       },
-      "authToken": {
-        "name": "authToken",
-        "description": "Authorization token you receive at login, needs to be assed in header as Key: Authorization, Value: BEARER {{token}}",
+      "rpcApi": {
+        "name": "rpcApi",
+        "description": "Enables json-rpc api of node client over http: default port 8545",
         "required": true,
         "schema": {
-          "title": "authToken",
-          "type": "string"
+          "title": "rpcApi",
+          "type": "boolean"
+        }
+      },
+      "wsApi": {
+        "name": "wsApi",
+        "description": "Enables json-rpc api of node client over websocket: default port 8546",
+        "required": true,
+        "schema": {
+          "title": "wsApi",
+          "type": "boolean"
         }
       }
     },

@@ -16,8 +16,8 @@ export const login: Login = async (userName, password) => {
   return userLogin;
 };
 
-export const getUser: GetUser = async (token, userName) => {
-  const getUserInfo = await dbGetUser(token, userName);
+export const getUser: GetUser = async (JWTtoken, userName) => {
+  const getUserInfo = await dbGetUser(JWTtoken, userName);
   return getUserInfo;
 };
 
@@ -49,7 +49,7 @@ const dbUserLogin = async (userName: string, password: string): Promise<any> => 
           user_Id: result[0]._id,
           email: result[0].email,
         },
-        "enApi");
+        password);
       return ({ status: "success", userName: result[0].userName, token, nodes: result[0].nodes });
     } else {
       throw new Error("Auth Error");
@@ -59,8 +59,8 @@ const dbUserLogin = async (userName: string, password: string): Promise<any> => 
   }
 };
 
-const dbGetUser = async (token: string, userName: string): Promise<any> => {
-  const myToken = await checkJWT(token);
+const dbGetUser = async (JWTtoken: string, userName: string): Promise<any> => {
+  const myToken = await checkJWT(JWTtoken);
   console.log("Getting user");
   const result = await Account.findOne({ userName }).select("-password").exec();
   return result;
