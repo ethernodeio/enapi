@@ -76,13 +76,7 @@
             "name": "success",
             "value": {
               "status": "success",
-              "createAccount": {
-                "nodes": [],
-                "_id": "5c9d42f39d69c93860c11bda",
-                "userName": "bakon",
-                "password": "$2b$10$mzIXwsSi9L6Z1dsqIo/oRO0xpppEudtWa34kXcsmRLTTBfO9BiXi.",
-                "userRole": "admin"
-              }
+              "message": "account Created"
             }
           }
         },
@@ -245,6 +239,9 @@
           "description": "example of susccefull user info fetch",
           "params": [
             {
+              "$ref": "#/components/examples/JWTtoken"
+            },
+            {
               "$ref": "#/components/examples/userName"
             }
           ],
@@ -252,21 +249,17 @@
             "name": "success",
             "value": {
               "result": {
-                "status": "success",
-                "account": {
-                  "nodes": [
-                    {
-                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
-                      "nodeName": "kotti-full",
-                      "nodeNetwork": "kotti"
-                    }
-                  ],
-                  "_id": "5c8ed3b654ab7b0efcde242f",
-                  "userName": "bakon",
-                  "password": "$2b$10$Gj1W.4L2M6FeClmDmbhlaeSLXtdVLk3MxmrInrDvwE83gBEt7QZMa",
-                  "__v": 0
-                },
-                "accounts": "yes"
+                "nodes": [
+                  {
+                    "nodeId": "2285bc02c1b2403ab12d09a24ffbf60151a916a40af574c42335c528e95294e8",
+                    "nodeName": "kotti",
+                    "nodeNetwork": "kotti"
+                  }
+                ],
+                "_id": "5d26de405a9b4e10927f3527",
+                "userName": "bakon3",
+                "userRole": "admin",
+                "__v": 0
               }
             }
           }
@@ -393,8 +386,11 @@
     },
     {
       "name": "removeNode",
-      "description": "Remove the docker container that is running the selected node to remove. Include auth token form login in header.",
+      "description": "Remove the docker container that is running the selected node to remove. Include JWT token as arg 0.",
       "params": [
+        {
+          "$ref": "#/components/contentDescriptors/JWTtoken"
+        },
         {
           "$ref": "#/components/contentDescriptors/userName"
         },
@@ -426,6 +422,9 @@
           "name": "removeNode",
           "description": "Example of node detroy success",
           "params": [
+            {
+              "$ref": "#/components/examples/JWTtoken"
+            },
             {
               "$ref": "#/components/examples/userName"
             },
@@ -472,7 +471,7 @@
       "description": "Inspect the docker container which is running the node. Include auth token form login in header.",
       "params": [
         {
-          "$ref": "#/components/contentDescriptors/userName"
+          "$ref": "#/components/contentDescriptors/JWTtoken"
         },
         {
           "$ref": "#/components/contentDescriptors/containerId"
@@ -500,7 +499,7 @@
           "description": "example of successful node info fetch",
           "params": [
             {
-              "$ref": "#/components/examples/userName"
+              "$ref": "#/components/examples/JWTtoken"
             },
             {
               "name": "containerId",
@@ -513,25 +512,11 @@
             "value": {
               "result": {
                 "status": "success",
-                "nodeInspect": {
-                  "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
-                  "containerCreated": "2019-03-29T03:16:10.371956508Z",
-                  "containerState": "running",
-                  "NetWorkSettings": {
-                    "containerIP": "172.17.0.3",
-                    "rcpPort": "33076"
-                  }
-                },
-                "nodeData": {
-                  "_id": "5c8ed3b654ab7b0efcde242f",
-                  "nodes": [
-                    {
-                      "nodeId": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
-                      "nodeName": "kotti-full",
-                      "nodeNetwork": "kotti"
-                    }
-                  ]
-                }
+                "containerID": "e62282029b4490e1f2198d71a724eefb7738cf4114cb55d486384fff9464d6cf",
+                "containerCreated": "2019-03-29T03:16:10.371956508Z",
+                "containerState": "running",
+                "rcpPort": "33076",
+                "wsPort": "33077"
               }
             }
           }
@@ -610,16 +595,8 @@
           "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
-          "name": "method",
-          "description": "ETH RPC method being called, web3_clientVersion",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "params",
-          "description": "Parameters required for the web3 call, none",
+          "name": "web3_clientVersion_params",
+          "description": "no params pass empty array []",
           "required": true,
           "schema": {
             "type": "array"
@@ -658,7 +635,7 @@
               "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "params",
+              "name": "web3_clientVersion_params",
               "type": "array",
               "value": []
             }
@@ -717,16 +694,8 @@
           "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
-          "name": "method",
-          "description": "method being called, net_version",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "params",
-          "description": "Parameters required for the web3 call, none, pass empty array",
+          "name": "net_listening_params",
+          "description": "no params pass empty array []",
           "required": true,
           "schema": {
             "type": "array"
@@ -809,6 +778,153 @@
           }
         }
       ]
+    },
+    {
+      "name": "web3_sha3",
+      "summary": "Hashes data",
+      "description": "Hashes data using the Keccak-256 algorithm",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "name": "web3_sha3_params",
+          "description": "Params for web3_sha3",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "data": {
+                  "name": "data",
+                  "description": "data to hash using the Keccak-256 algorithm",
+                  "type": "string",
+                  "pattern": "^0x[a-fA-F\\d]+$"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "hashedData",
+        "description": "Keccak-256 hash of the given data",
+        "schema": {
+          "type": "string",
+          "description": "Hex representation of a Keccak 256 hash",
+          "pattern": "^0x[a-fA-F\\d]{64}$"
+        }
+      },
+      "examples": [
+        {
+          "name": "sha3Example",
+          "params": [
+            {
+              "name": "sha3ParamExample",
+              "value": "0x68656c6c6f20776f726c64"
+            }
+          ],
+          "result": {
+            "name": "sha3ResultExample",
+            "value": "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad"
+          }
+        }
+      ]
+    },
+    {
+      "name": "net_listening",
+      "summary": "returns listening status",
+      "description": "Determines if this client is listening for new network connections.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "name": "net_listening_params",
+          "description": "no params pass empty array []",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "netListeningResult",
+        "description": "`true` if listening is active or `false` if listening is not active",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "examples": [
+        {
+          "name": "netListeningTrueExample",
+          "description": "example of true result for net_listening",
+          "params": [
+            {
+              "$ref": "#/components/examples/userName"
+            },
+            {
+              "$ref": "#/components/examples/nodeName"
+            },
+            {
+              "$ref": "#/components/examples/nodeNetwork"
+            },
+            {
+              "name": "params",
+              "type": "array",
+              "value": []
+            }
+          ],
+          "result": {
+            "name": "netListeningExampleFalseResult",
+            "value": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "net_peerCount",
+      "summary": "number of peers",
+      "description": "Returns the number of peers currently connected to this client.",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/userName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/nodeNetwork"
+        },
+        {
+          "name": "net_peerCount_params",
+          "description": "no params pass empty array []",
+          "required": true,
+          "schema": {
+            "type": "array"
+          }
+        }
+      ],
+      "result": {
+        "name": "quantity",
+        "description": "number of connected peers.",
+        "schema": {
+          "description": "Hex representation of number of connected peers",
+          "type": "string"
+        }
+      }
     }
   ],
   "components": {
@@ -901,9 +1017,25 @@
           "title": "wsApi",
           "type": "boolean"
         }
+      },
+      "web3params": {
+        "name": "web3params",
+        "description": "Parameters required for the web3 call, if none pass empty array",
+        "required": true,
+        "schema": {
+          "title": "web3params",
+          "type": "array"
+        }
       }
     },
     "examples": {
+      "JWTtoken": {
+        "name": "JWTtoken",
+        "type": "string",
+        "summary": "JWT token provided after login",
+        "description": "JWT token provided after login",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQyNDRjZDRkNWZjZjQ3MjNkZjk1MjNjIiwiaWF0IjoxNTYyNjYwMDU3fQ.Pt4aZvmEip226P3rp75UtPamjqTuZTqcy4UH9vEzKTk"
+      },
       "userName": {
         "name": "userName",
         "type": "string",
@@ -950,6 +1082,27 @@
         "summary": "Type of sync the node is performing",
         "description": "Is this node a Light, Full, or Full - Archive sync",
         "value": "full"
+      },
+      "rpcApi": {
+        "name": "rpcApi",
+        "type": "boolean",
+        "summary": "Enable or Disable rpc api on node client over http",
+        "description": "Enable or Disable rpc api on node client over http",
+        "value": "true"
+      },
+      "wsApi": {
+        "name": "wsApi",
+        "type": "boolean",
+        "summary": "Enable or Disable rpc api on node client over websocket",
+        "description": "Enable or Disable rpc api on node client over websocket",
+        "value": "true"
+      },
+      "web3params": {
+        "name": "web3params",
+        "type": "array",
+        "summary": "Parameters required for the web3 call, if none pass empty array",
+        "description": "Parameters required for the web3 call, if none pass empty array",
+        "value": "[]"
       }
     }
   }

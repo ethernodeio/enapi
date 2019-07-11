@@ -1,35 +1,47 @@
-import { AddNode, RemoveNode, GetNodeContainerInfo } from "../__GENERATED_TYPES__/index.js";
-import os from "os";
-import accountdb from "../models/account.js";
+import { AddNode, RemoveNode, GetNodeContainerInfo, StringFR9VhzBk } from "../__GENERATED_TYPES__/index.js";
+import os, { networkInterfaces } from "os";
+import mongoose from "mongoose";
+import Account from "../models/account";
 import Docker from "dockerode";
+import { promises } from "fs";
 const docker = new Docker({ socketPath: "/var/run/docker.sock" });
 const cpu = os.arch();
 const ram = os.totalmem();
 
+// #######################################
+//          ####NODE METHODS ####
+// #######################################
 export const addNode: AddNode = async (JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi) => {
   const newNode = await dbCreateNode(JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi);
   return newNode;
 };
 
-export const removeNode: RemoveNode = async (userName, containerId, nodeName) => {
+export const removeNode: RemoveNode = async (JWTtoken, userName, containerId, nodeName) => {
+  const removeContainer = await dbRemoveNode(JWTtoken, userName, containerId, nodeName);
+  return removeContainer;
+};
+export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, containerId): Promise<any> => {
   return new Promise((resolve, reject) => {
-    resolve({
-      status: "success",
-      message: "Node Removed",
+    docker.getContainer(containerId).inspect((err, data: { Id: string, Created: string, State: { Status: string }, NetworkSettings: { Ports: any } }) => {
+      if (err) {
+        console.log(err);
+        return resolve(err);
+      }
+      let selected = [{
+        containerID: data.Id,
+        containerCreated: data.Created,
+        containerState: data.State.Status,
+        rpcPort: data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort,
+        wsPort: data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort,
+      }];
+      resolve(selected);
     });
   });
 };
 
-export const getNodeContainerInfo: GetNodeContainerInfo = async (userName, containerId) => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      status: "success",
-      message: "Container Info",
-    });
-  });
-};
-
-// #####MODELS FOR METHODS #####
+// #######################################
+//   ####MODELS FOR NODE METHODS ####
+// #######################################
 const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string, nodeNetwork: string, syncType: string, rpcApi: boolean, wsApi: boolean): Promise<any> => {
   const swap = ram * 2;
   const maxpeers = 25;
@@ -87,9 +99,9 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     var dockerImage = "bakon3/multigethx86";
   } else if (cpu === "x64" && nodeNetwork === "ethnet") {
     var dockerImage = "bakon3/multigethx86";
-  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "ETC") {
+  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "ETC")) {
     var dockerImage = "bakon3/multigetharm";
-  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "kotti") {
+  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "kotti")) {
     var dockerImage = "bakon3/multigetharm";
   } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "ethnet")) {
     var dockerImage = "bakon3/multigetharm";
@@ -145,31 +157,40 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     // Entrypoint: [ 'bin/mantis' ],
     OpenStdin: false,
     StdinOnce: false,
-  })
-    .then((container) => {
-      container.inspect((err: any, data: { Id: string; }) => {
+  }).then((container) => {
+    container.inspect(async (err: any, result: { Id: string; }) => {
+      if (err) {
+        console.log(err);
+        throw new Error(err);
+      }
+      const dbAddNodeInfo = await Account.updateOne({ userName }, { $push: { nodes: { nodeId: result.Id, nodeName, nodeNetwork } } }).exec();
+      console.log(dbAddNodeInfo);
+      docker.getContainer(result.Id).start((error, data) => {
         if (err) {
-          console.log(err);
-          // return callback(null, { status: "error", message: err });
+          console.log(error);
+          throw new Error(error);
         }
-        accountdb.updateOne({ userName }, { $push: { nodes: { nodeId: data.Id, nodeName, nodeNetwork } } }).exec()
-          .then(() => {
-            docker.getContainer(data.Id).start((error, data) => {
-              if (err) {
-                console.log(error);
-                throw new Error(error);
-              }
-            });
-            return ({ status: "success", message: "Node Added" });
-          })
-          .catch((error) => {
-            console.log(error);
-            throw new Error(error);
-          });
       });
-    })
-    .catch((error) => {
-      console.log(error);
-      throw new Error(error);
     });
+  }).catch((error) => {
+    console.log(error);
+    throw new Error(error);
+  });
+  return { status: "success", message: "Node Added" };
+};
+
+const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string): Promise<any> => {
+  const nodeName1 = nodeName.replace(/\s/g, "");
+  docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
+    // console.log("container removed: " + data);
+    if (err) {
+      console.log(err);
+      throw new Error(err);
+    }
+    await Account.updateOne({ userName }, { $pull: { nodes: { nodeId: containerId } } }).exec();
+  });
+  return {
+    status: "success",
+    message: "Node Removed",
+  };
 };

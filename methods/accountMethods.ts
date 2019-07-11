@@ -5,7 +5,9 @@ import Account from "../models/account";
 import bcrypt from "bcrypt";
 import { checkJWT } from "../middleware/checkauth";
 
-// json-rpc methods
+// #######################################
+//       ####ACCOUNT METHODS ####
+// #######################################
 export const createUser: CreateUser = async (userName, password, userRole) => {
   const newUser = await dbCreateUser(userName, password, userRole);
   return newUser;
@@ -20,8 +22,9 @@ export const getUser: GetUser = async (JWTtoken, userName) => {
   const getUserInfo = await dbGetUser(JWTtoken, userName);
   return getUserInfo;
 };
-
-// #####MODELS FOR METHODS #####
+// #######################################
+//   ####MODELS FOR ACCOUNT METHODS ####
+// #######################################
 const dbCreateUser = async (userName: string, password: string, userRole: string): Promise<any> => {
   const result = await Account.find({ userName }).exec();
   if (result.length > 0) {

@@ -8,6 +8,7 @@
     "max-line-length": false,
     "prefer-const": false,
     "no-var-keyword": false,
+    "variable-name": false,
     "no-console": [
       false
     ],
