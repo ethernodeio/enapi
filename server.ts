@@ -7,7 +7,7 @@ import openrpcDocument from "./openrpc.json";
 import { createUser, login, getUser } from "./methods/accountMethods";
 import { addNode, removeNode, getNodeContainerInfo } from "./methods/nodeMethods";
 import { sol_compile } from "./methods/solidityMethods";
-import { web3_clientVersion, web3_sha3, net_listening, net_peerCount, net_version } from "./methods/ethrpcMethods";
+import { ethRpcCall } from "./methods/ethrpcMethods";
 import mongoose from "mongoose";
 
 mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true });
@@ -20,11 +20,7 @@ const methods = {
   removeNode,
   getNodeContainerInfo,
   sol_compile,
-  web3_clientVersion,
-  web3_sha3,
-  net_listening,
-  net_peerCount,
-  net_version,
+  ethRpcCall,
 };
 
 const router = new Router(openrpcDocument as any, methods);

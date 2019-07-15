@@ -582,8 +582,8 @@
       }
     },
     {
-      "name": "web3_clientVersion",
-      "description": "Returns the current client version.",
+      "name": "ethRpcCall",
+      "description": "Make a web3 call to your node: view list of calls here: https://github.com/etclabscore/ethereum-json-rpc-specification ",
       "params": [
         {
           "$ref": "#/components/contentDescriptors/userName"
@@ -595,17 +595,33 @@
           "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
-          "name": "web3_clientVersion_params",
-          "description": "no params pass empty array []",
+          "name": "web3callMethod",
+          "description": "jsonRpc call you want to make to your node",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "web3callParams",
+          "description": "Params required for web3 call, pass empty array of none",
           "required": true,
           "schema": {
             "type": "array"
           }
+        },
+        {
+          "name": "rpcId",
+          "description": "rpc Id",
+          "required": true,
+          "schema": {
+            "type": "number"
+          }
         }
       ],
       "result": {
-        "name": "web3_clientVersion",
-        "description": "Returns the current node client version",
+        "name": "web3callResult",
+        "description": "Returns the data from your node",
         "schema": {
           "type": "object",
           "properties": {
@@ -615,7 +631,7 @@
             },
             "message": {
               "type": "string",
-              "description": "Returns the current node client version"
+              "description": "Returns the web3 call data from your node"
             }
           }
         }
@@ -626,6 +642,9 @@
           "description": "Display Client Version Success, Example of web3_clientVersion",
           "params": [
             {
+              "$ref": "#/components/examples/JWTtoken"
+            },
+            {
               "$ref": "#/components/examples/userName"
             },
             {
@@ -635,7 +654,12 @@
               "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "web3_clientVersion_params",
+              "name": "web3callMethod",
+              "type": "string",
+              "value": "web3_clientVersion"
+            },
+            {
+              "name": "web3callParams",
               "type": "array",
               "value": []
             }
@@ -656,7 +680,7 @@
           "description": "node query error example",
           "params": [
             {
-              "$ref": "#/components/examples/userName"
+              "$ref": "#/components/examples/JWTtoken"
             },
             {
               "$ref": "#/components/examples/nodeName"
@@ -665,9 +689,19 @@
               "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "params",
+              "name": "web3callMethod",
+              "type": "string",
+              "value": "web3_clientVersion"
+            },
+            {
+              "name": "web3callParams",
               "type": "array",
               "value": []
+            },
+            {
+              "name": "rpcId",
+              "type": "number",
+              "value": "42"
             }
           ],
           "result": {
@@ -681,8 +715,8 @@
       ]
     },
     {
-      "name": "net_version",
-      "description": "Returns the current network id of queried node",
+      "name": "iotcall",
+      "description": "calls for IoT solution WIP",
       "params": [
         {
           "$ref": "#/components/contentDescriptors/userName"
@@ -694,17 +728,33 @@
           "$ref": "#/components/contentDescriptors/nodeNetwork"
         },
         {
-          "name": "net_listening_params",
-          "description": "no params pass empty array []",
+          "name": "iotcallMethod",
+          "description": "calls for IoT solution WIP",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "iotcallParams",
+          "description": "Params required for web3 call, pass empty array of none",
           "required": true,
           "schema": {
             "type": "array"
           }
+        },
+        {
+          "name": "rpcId",
+          "description": "rpc Id",
+          "required": true,
+          "schema": {
+            "type": "number"
+          }
         }
       ],
       "result": {
-        "name": "net_version",
-        "description": "Returns the current network id.",
+        "name": "iotcallResult",
+        "description": "If subscription will return subscription id to creat unsubscribe call",
         "schema": {
           "type": "object",
           "properties": {
@@ -714,15 +764,15 @@
             },
             "message": {
               "type": "string",
-              "description": "Returns the current network id of quered node"
+              "description": "Returns Subscription ID String"
             }
           }
         }
       },
       "examples": [
         {
-          "name": "Returns the current network id.",
-          "description": "Example Returns the current network id.",
+          "name": "shh_subscribeSuccess",
+          "description": "Creates a whisper subscription to the network that listens for device messages",
           "params": [
             {
               "$ref": "#/components/examples/userName"
@@ -734,24 +784,37 @@
               "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "params",
+              "name": "iotcallMethod",
+              "type": "string",
+              "value": "shh_subscribe"
+            },
+            {
+              "name": "iotcallParams",
               "type": "array",
-              "value": []
+              "value": [
+                "messages",
+                {
+                  "topics": [
+                    "0x6465766963654964"
+                  ],
+                  "symKeyID": "7d7ae10ad10af2a994b676b9aa6c5d278473253a3485a600004e359dd4afa23c"
+                }
+              ]
             }
           ],
           "result": {
-            "name": "net_version",
+            "name": "shh_subscribe",
             "value": {
               "result": {
                 "jsonrpc": "2.0",
                 "id": 42,
-                "result": "6"
+                "result": "0x854d7c27a10c899455084ce669cb21b4"
               }
             }
           }
         },
         {
-          "name": "net_version",
+          "name": "shh_subscribeError",
           "description": "node query error example",
           "params": [
             {
@@ -764,7 +827,12 @@
               "$ref": "#/components/examples/nodeNetwork"
             },
             {
-              "name": "params",
+              "name": "iotcallMethod",
+              "type": "string",
+              "value": "shh_subscribe"
+            },
+            {
+              "name": "iotcallParams",
               "type": "array",
               "value": []
             }
@@ -778,153 +846,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "web3_sha3",
-      "summary": "Hashes data",
-      "description": "Hashes data using the Keccak-256 algorithm",
-      "params": [
-        {
-          "$ref": "#/components/contentDescriptors/userName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeNetwork"
-        },
-        {
-          "name": "web3_sha3_params",
-          "description": "Params for web3_sha3",
-          "required": true,
-          "schema": {
-            "type": "array",
-            "items": {
-              "properties": {
-                "data": {
-                  "name": "data",
-                  "description": "data to hash using the Keccak-256 algorithm",
-                  "type": "string",
-                  "pattern": "^0x[a-fA-F\\d]+$"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "result": {
-        "name": "hashedData",
-        "description": "Keccak-256 hash of the given data",
-        "schema": {
-          "type": "string",
-          "description": "Hex representation of a Keccak 256 hash",
-          "pattern": "^0x[a-fA-F\\d]{64}$"
-        }
-      },
-      "examples": [
-        {
-          "name": "sha3Example",
-          "params": [
-            {
-              "name": "sha3ParamExample",
-              "value": "0x68656c6c6f20776f726c64"
-            }
-          ],
-          "result": {
-            "name": "sha3ResultExample",
-            "value": "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad"
-          }
-        }
-      ]
-    },
-    {
-      "name": "net_listening",
-      "summary": "returns listening status",
-      "description": "Determines if this client is listening for new network connections.",
-      "params": [
-        {
-          "$ref": "#/components/contentDescriptors/userName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeNetwork"
-        },
-        {
-          "name": "net_listening_params",
-          "description": "no params pass empty array []",
-          "required": true,
-          "schema": {
-            "type": "array"
-          }
-        }
-      ],
-      "result": {
-        "name": "netListeningResult",
-        "description": "`true` if listening is active or `false` if listening is not active",
-        "schema": {
-          "type": "boolean"
-        }
-      },
-      "examples": [
-        {
-          "name": "netListeningTrueExample",
-          "description": "example of true result for net_listening",
-          "params": [
-            {
-              "$ref": "#/components/examples/userName"
-            },
-            {
-              "$ref": "#/components/examples/nodeName"
-            },
-            {
-              "$ref": "#/components/examples/nodeNetwork"
-            },
-            {
-              "name": "params",
-              "type": "array",
-              "value": []
-            }
-          ],
-          "result": {
-            "name": "netListeningExampleFalseResult",
-            "value": true
-          }
-        }
-      ]
-    },
-    {
-      "name": "net_peerCount",
-      "summary": "number of peers",
-      "description": "Returns the number of peers currently connected to this client.",
-      "params": [
-        {
-          "$ref": "#/components/contentDescriptors/userName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeNetwork"
-        },
-        {
-          "name": "net_peerCount_params",
-          "description": "no params pass empty array []",
-          "required": true,
-          "schema": {
-            "type": "array"
-          }
-        }
-      ],
-      "result": {
-        "name": "quantity",
-        "description": "number of connected peers.",
-        "schema": {
-          "description": "Hex representation of number of connected peers",
-          "type": "string"
-        }
-      }
     }
   ],
   "components": {
