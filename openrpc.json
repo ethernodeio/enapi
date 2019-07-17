@@ -102,6 +102,82 @@
       ]
     },
     {
+      "name": "deleteUser",
+      "description": "Removes user and any running nodes for that user, only admin can remove users",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/JWTtoken"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/userId"
+        }
+      ],
+      "result": {
+        "name": "deleteUser",
+        "description": "Returns remove user success",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Return Success"
+            },
+            "message": {
+              "type": "string",
+              "description": "Returns user removed result"
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": 250,
+          "data": [],
+          "message": "User Doesnot exist"
+        }
+      ],
+      "examples": [
+        {
+          "name": "Delete User Success Example",
+          "description": "example of delete user",
+          "params": [
+            {
+              "$ref": "#/components/examples/JWTtoken"
+            },
+            {
+              "$ref": "#/components/examples/userId"
+            }
+          ],
+          "result": {
+            "name": "success",
+            "value": {
+              "status": "success",
+              "message": "account Deleted"
+            }
+          }
+        },
+        {
+          "name": "Delete User Error Example",
+          "description": "example of delete user error",
+          "params": [
+            {
+              "$ref": "#/components/examples/JWTtoken"
+            },
+            {
+              "$ref": "#/components/examples/userId"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "User doesn't exist"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "login",
       "description": "checks for user account and sets login variables and fetches JWT token.",
       "params": [
@@ -850,6 +926,15 @@
   ],
   "components": {
     "contentDescriptors": {
+      "userId": {
+        "name": "userId",
+        "description": "user Id",
+        "required": true,
+        "schema": {
+          "title": "userId",
+          "type": "string"
+        }
+      },
       "userName": {
         "name": "userName",
         "description": "user name",
@@ -956,6 +1041,13 @@
         "summary": "JWT token provided after login",
         "description": "JWT token provided after login",
         "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQyNDRjZDRkNWZjZjQ3MjNkZjk1MjNjIiwiaWF0IjoxNTYyNjYwMDU3fQ.Pt4aZvmEip226P3rp75UtPamjqTuZTqcy4UH9vEzKTk"
+      },
+      "userId": {
+        "name": "userId",
+        "type": "string",
+        "summary": "auto generated on creation unique user id",
+        "description": "mongodb auto generate unique user id",
+        "value": "cv9x7v98sdv09sdiv09"
       },
       "userName": {
         "name": "userName",

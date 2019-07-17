@@ -4,7 +4,7 @@ import { OpenRPC } from "@open-rpc/meta-schema";
 import { IHTTPServerTransportOptions } from "@open-rpc/server-js/build/transports/http";
 import { IWebSocketServerTransportOptions } from "@open-rpc/server-js/build/transports/websocket";
 import openrpcDocument from "./openrpc.json";
-import { createUser, login, getUser } from "./methods/accountMethods";
+import { createUser, deleteUser, login, getUser } from "./methods/accountMethods";
 import { addNode, removeNode, getNodeContainerInfo } from "./methods/nodeMethods";
 import { sol_compile } from "./methods/solidityMethods";
 import { ethRpcCall } from "./methods/ethrpcMethods";
@@ -14,6 +14,7 @@ mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true });
 
 const methods = {
   createUser,
+  deleteUser,
   login,
   getUser,
   addNode,

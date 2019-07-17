@@ -1,4 +1,4 @@
-import { CreateUser, Login, GetUser } from "../__GENERATED_TYPES__/index.js";
+import { CreateUser, DeleteUser, Login, GetUser } from "../__GENERATED_TYPES__/index.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Account from "../models/account";
@@ -22,8 +22,14 @@ export const getUser: GetUser = async (JWTtoken, userName) => {
   const getUserInfo = await dbGetUser(JWTtoken, userName);
   return getUserInfo;
 };
+
+export const deleteUser: DeleteUser = async (JWTtoken, userId) => {
+  const deleUser = await dbDeleteUser(JWTtoken, userId);
+  return deleUser;
+}
+
 // #######################################
-//   ####MODELS FOR ACCOUNT METHODS ####
+//   ####FUNCTIONSFOR ACCOUNT METHODS ####
 // #######################################
 const dbCreateUser = async (userName: string, password: string, userRole: string): Promise<any> => {
   const result = await Account.find({ userName }).exec();
@@ -39,6 +45,16 @@ const dbCreateUser = async (userName: string, password: string, userRole: string
     });
     account.save();
     return { status: "success", message: "account Created" };
+  }
+};
+
+const dbDeleteUser = async (JWTtoken: string, userId: string): Promise<any> => {
+  try {
+    const result = await Account.findOneAndDelete({ _id: userId });
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
   }
 };
 
