@@ -364,7 +364,7 @@
     },
     {
       "name": "addNode",
-      "description": "Spin up a docker container with node settings specified in the dashboard. Include auth token form login in header.",
+      "description": "Spin up a docker container with node node settings, pass \"ethnet\" if you're spinning up Ethereum Mainnet.",
       "params": [
         {
           "$ref": "#/components/contentDescriptors/JWTtoken"
@@ -778,139 +778,6 @@
               "name": "rpcId",
               "type": "number",
               "value": "42"
-            }
-          ],
-          "result": {
-            "name": "error",
-            "value": {
-              "status": "error",
-              "message": "error message"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "iotcall",
-      "description": "calls for IoT solution WIP",
-      "params": [
-        {
-          "$ref": "#/components/contentDescriptors/userName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeName"
-        },
-        {
-          "$ref": "#/components/contentDescriptors/nodeNetwork"
-        },
-        {
-          "name": "iotcallMethod",
-          "description": "calls for IoT solution WIP",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "iotcallParams",
-          "description": "Params required for web3 call, pass empty array of none",
-          "required": true,
-          "schema": {
-            "type": "array"
-          }
-        },
-        {
-          "name": "rpcId",
-          "description": "rpc Id",
-          "required": true,
-          "schema": {
-            "type": "number"
-          }
-        }
-      ],
-      "result": {
-        "name": "iotcallResult",
-        "description": "If subscription will return subscription id to creat unsubscribe call",
-        "schema": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string",
-              "description": "Returns: 'Success'"
-            },
-            "message": {
-              "type": "string",
-              "description": "Returns Subscription ID String"
-            }
-          }
-        }
-      },
-      "examples": [
-        {
-          "name": "shh_subscribeSuccess",
-          "description": "Creates a whisper subscription to the network that listens for device messages",
-          "params": [
-            {
-              "$ref": "#/components/examples/userName"
-            },
-            {
-              "$ref": "#/components/examples/nodeName"
-            },
-            {
-              "$ref": "#/components/examples/nodeNetwork"
-            },
-            {
-              "name": "iotcallMethod",
-              "type": "string",
-              "value": "shh_subscribe"
-            },
-            {
-              "name": "iotcallParams",
-              "type": "array",
-              "value": [
-                "messages",
-                {
-                  "topics": [
-                    "0x6465766963654964"
-                  ],
-                  "symKeyID": "7d7ae10ad10af2a994b676b9aa6c5d278473253a3485a600004e359dd4afa23c"
-                }
-              ]
-            }
-          ],
-          "result": {
-            "name": "shh_subscribe",
-            "value": {
-              "result": {
-                "jsonrpc": "2.0",
-                "id": 42,
-                "result": "0x854d7c27a10c899455084ce669cb21b4"
-              }
-            }
-          }
-        },
-        {
-          "name": "shh_subscribeError",
-          "description": "node query error example",
-          "params": [
-            {
-              "$ref": "#/components/examples/userName"
-            },
-            {
-              "$ref": "#/components/examples/nodeName"
-            },
-            {
-              "$ref": "#/components/examples/nodeNetwork"
-            },
-            {
-              "name": "iotcallMethod",
-              "type": "string",
-              "value": "shh_subscribe"
-            },
-            {
-              "name": "iotcallParams",
-              "type": "array",
-              "value": []
             }
           ],
           "result": {

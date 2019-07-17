@@ -62,24 +62,17 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--verbosity=3",
     "--maxpeers=" + maxpeers,
   ];
-  if (nodeNetwork === "morden") {
-    geth.push("--morden");
-  } else if (nodeNetwork === "ETC") {
-    geth.push("--classic");
-  } else if (nodeNetwork === "ethnet") {
-    console.log("ETH");
-  } else if (nodeNetwork === "kotti") {
-    geth.push("--kotti");
+
+  if (nodeNetwork !== "ethnet") {
+    geth.push("--" + nodeNetwork);
   }
-  if (syncType === "fullnode") {
-    geth.push("--syncmode=full");
-  } else if (syncType === "fastsync") {
+
+  if (syncType === "" || syncType === undefined) {
     geth.push("--syncmode=fast");
-  } else if (syncType === "lightnode") {
-    geth.push("--syncmode=light");
   } else {
-    geth.push("--syncmode=fast");
+    geth.push("--syncmode=" + syncType);
   }
+
   if (bootnodes) {
     geth.push(bootnodes);
   }

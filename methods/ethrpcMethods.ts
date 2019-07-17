@@ -1,6 +1,5 @@
 import { EthRpcCall } from "../__GENERATED_TYPES__/index.js";
 import net from "net";
-import { Int32 } from "bson";
 
 // #######################################
 //       ####ETH RPC METHODS ####
@@ -22,7 +21,7 @@ const makeRPCcall = (userName: string, nodeName: string, nodeNetwork: string, we
     });
     var obj = {
       jsonrpc: "2.0",
-      web3callMethod,
+      method: web3callMethod,
       params: [...web3callParams],
       id: rpcId,
     };
