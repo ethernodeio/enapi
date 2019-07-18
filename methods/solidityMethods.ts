@@ -4,7 +4,7 @@ import { SolCompile } from "../__GENERATED_TYPES__/index.js";
 export const sol_compile: SolCompile = async (u) => {
   return new Promise((resolve, reject) => {
     resolve({
-      solResult: "Your stupid bytecode",
+      solResult: "Coming Soon",
     });
   });
 };
