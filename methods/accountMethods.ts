@@ -17,12 +17,12 @@ export const login: Login = async (userName, password) => {
 };
 export const getUser: GetUser = async (JWTtoken, userName) => {
   await checkJWT(JWTtoken);
-  const getUserInfo = await dbGetUser(JWTtoken, userName);
+  const getUserInfo = await dbGetUser(userName);
   return getUserInfo;
 };
 export const deleteUser: DeleteUser = async (JWTtoken, userId) => {
   await checkJWT(JWTtoken);
-  const deleUser = await dbDeleteUser(JWTtoken, userId);
+  const deleUser = await dbDeleteUser(userId);
   return deleUser;
 };
 // #######################################
@@ -44,7 +44,11 @@ const dbCreateUser = async (userName: string, password: string, userRole: string
     return { status: "success", message: "account Created" };
   }
 };
-const dbDeleteUser = async (JWTtoken: string, userId: string): Promise<any> => {
+const dbDeleteUser = async (userId: string): Promise<any> => {
+  const resultNodes = await Account.find({ _id: userId }).exec();
+  if (resultNodes[0].nodes.length > 0) {
+    throw new Error("User has running nodes");
+  }
   try {
     const result = await Account.findOneAndDelete({ _id: userId });
     console.log(result);
@@ -72,7 +76,7 @@ const dbUserLogin = async (userName: string, password: string): Promise<any> => 
     throw new Error("Auth Error");
   }
 };
-const dbGetUser = async (JWTtoken: string, userName: string): Promise<any> => {
+const dbGetUser = async (userName: string): Promise<any> => {
   console.log("Getting user");
   const result = await Account.findOne({ userName }).select("-password").exec();
   return result;

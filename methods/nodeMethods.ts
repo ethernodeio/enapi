@@ -5,6 +5,7 @@ import Docker from "dockerode";
 import { exec } from "child_process";
 import { checkJWT } from "../middleware/checkauth";
 const docker = new Docker({ socketPath: "/var/run/docker.sock" });
+
 const cpu = os.arch();
 const ram = os.totalmem();
 // #######################################

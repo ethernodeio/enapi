@@ -30,6 +30,10 @@ sudo apt-get update &&
 sudo apt-cache policy docker-ce &&
 sudo apt-get install -y docker-ce make &&
 echo '\e[92m################################################'
+echo 				'Pulling Docker Images for multi-geth ARM'
+echo '#################################################\e[0m'
+sudo docker pull bakon3/multigetharm &&
+echo '\e[92m################################################'
 echo 				'Installing certbot to secure it all'
 echo '#################################################\e[0m'
 sudo add-apt-repository ppa:certbot/certbot -y &&
