@@ -1,52 +1,33 @@
-# Pristine Typescript
+enAPI nodeJS json-rpc 2.0 API and tools to easily spin up blockchain nodes and build dapps on top of.
 
-A typescript open source repository in its original condition.
+Please check out the enApi docs in the OpenRPC playground: [DOCS](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/enapi/master/openrpc.json&uiSchema%5BappBar%5D%5Bui:title%5D=EnOS&uiSchema%5BappBar%5D%5Bui:logoUrl%5D=https://ethernode.io/static/media/Header-Dark.7d8eb2a9.png&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:darkMode%5D=true)
 
-Pristine Typescript a fork of [Pristine](https://github.com/etclabscore/pristine).
+To start using enAPI today, you will need a linux distribution, like Ubuntu.
 
-There are a lack of repositories to start from to build community driven open source projects. Pristine Typescript is a complete starting point, it follows a Documentation Driven Development approach, and can be used as a resource to augment existing documentation.
+Afterwards make sure you have at least git installed and clone this repo.
 
-## How to use Pristine in your project
+Once you have the enApi repo clone there is two sh files included in the `postsetup` directory.
 
-There are 2 options for using pristine with your project.
-1. Fork this repo as the start of your own, OR
-2. [follow these instructions](https://thoughts.t37.net/merging-2-different-git-repositories-without-losing-your-history-de7a06bba804) to use it on an existing repository.
+You can execute those on a debian/ubuntu based system depending on your CPU architecture ARM or x86.
 
-## Documentation Driven Development
+If you are working with another distro, all you will need to have pre installed is: Docker, nodeJS, NPM, and mongoDB.
 
-There are many ways to drive open source development. Documenting the problem in the README gives a middle ground between technical and non-technical specifications. This allows organizing solutions to this challenge around community and documentation.
+Once you have docker installed you will need to pull our docker container for multi-geth, depending on your CPU architecture.
 
-> [...] a beautifully crafted library with no documentation is also damn near worthless. If your software solves the wrong problem or nobody can figure out how to use it, there’s something very bad going on.
+Again your options are ARM and x86.
 
-- [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html) by Tom Preson-Werner
+For x86 devices run `sudo docker pull bakon3/multigethx86` 
+And for ARM based devices run `sudo docker pull bakon3/multigetharm`
 
-### Conventions and Specifications
+After you have the docker images available, go ahead and CD into you the enApi directory and run: `npm install`
 
-This repository has some strong opinions built in like circleci, semantic-release, npm. So feel free to fork and change it at your own discretion. It is only meant to be a starting point. That being said:
+This will install all dependencies for enApi to run, once all dependencies are finished running, one last step is to run: `npm run typings` to make sure all type of are decalred.
 
-Using conventions, documentation and specifications make it easier to:
-- communicate the problem you are solving
-- ease onboarding
-- build and use composable tools
-- promote open source contribution and engagement
-- promote issue and feature discussion on Github itself
+Last step before starting up enApi, is to create the persistant storage directory, currently it's set for  `/media/ssd/.multigeth/` In this directory the node software will store it's chain data and IPC files.  This also allows for easy node client updates without losing the chaindata after every upgrade and restart.
 
-#### Resources
+So go ahead and create it, `sudo mkdir -p /media/ssd/.multigeth/`
 
-- [Pristine](https://github.com/etclabscore/pristine)
-- [opensource.guide](https://opensource.guide/)
-- [Github community profiles for public repositories](https://help.github.com/articles/about-community-profiles-for-public-repositories/)
-- [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
-- [pengwynn/flint](https://github.com/pengwynn/flint)
-- [Working Backwards](https://www.allthingsdistributed.com/2006/11/working_backwards.html)
-- [Literate programming](https://en.wikipedia.org/wiki/Literate_programming)
-- [Hammock Driven Development](https://www.youtube.com/watch?v=f84n5oFoZBc)
-- [Inversion and The Power of Avoiding Stupidity](https://fs.blog/2013/10/inversion/)
-- [choosealicense.com](http://choosealicense.com)
-
-## Getting Started
-
-To get started, [fork](https://help.github.com/articles/fork-a-repo/) or [duplicate](https://help.github.com/articles/duplicating-a-repository/) the repository. Then edit this file and delete everything above this line.
+And you should be able to run enApi with: `sudo npm start`
 
 ### Contributing
 

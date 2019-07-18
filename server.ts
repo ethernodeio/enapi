@@ -1,22 +1,27 @@
-
 import { Server, IServerOptions } from "@open-rpc/server-js";
 import { Router } from "@open-rpc/server-js";
 import { OpenRPC } from "@open-rpc/meta-schema";
 import { IHTTPServerTransportOptions } from "@open-rpc/server-js/build/transports/http";
 import { IWebSocketServerTransportOptions } from "@open-rpc/server-js/build/transports/websocket";
 import openrpcDocument from "./openrpc.json";
-import { createUser, login, getUser } from "./methods/accountMethods";
+import { createUser, deleteUser, login, getUser } from "./methods/accountMethods";
 import { addNode, removeNode, getNodeContainerInfo } from "./methods/nodeMethods";
-import { web3_clientVersion } from "./methods/ethrpcMethods";
+import { sol_compile } from "./methods/solidityMethods";
+import { ethRpcCall } from "./methods/ethrpcMethods";
+import mongoose from "mongoose";
+
+mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true });
 
 const methods = {
   createUser,
+  deleteUser,
   login,
   getUser,
   addNode,
   removeNode,
   getNodeContainerInfo,
-  web3_clientVersion,
+  sol_compile,
+  ethRpcCall,
 };
 
 const router = new Router(openrpcDocument as any, methods);
@@ -43,4 +48,4 @@ const options = {
 
 const server = new Server(options);
 
-console.log(server.start());
+server.start();
