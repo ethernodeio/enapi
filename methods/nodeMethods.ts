@@ -5,9 +5,12 @@ import Docker from "dockerode";
 import { exec } from "child_process";
 import { checkJWT } from "../middleware/checkauth";
 const docker = new Docker({ socketPath: "/var/run/docker.sock" });
-
 const cpu = os.arch();
 const ram = os.totalmem();
+console.log("CPU Arch: " + cpu);
+console.log("Host RAM: " + ram);
+console.log("enAPI Ready to start Blockchain Nodes");
+
 // #######################################
 //          ####NODE METHODS ####
 // #######################################
@@ -87,20 +90,14 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--wsaddr=0.0.0.0");
     geth.push("--wsorigins=*");
   }
-  if (cpu === "x64" && nodeNetwork === "ETC") {
+  if (cpu === "x64") {
     var dockerImage = "bakon3/multigethx86";
-  } else if (cpu === "x64" && nodeNetwork === "kotti") {
-    var dockerImage = "bakon3/multigethx86";
-  } else if (cpu === "x64" && nodeNetwork === "ethnet") {
-    var dockerImage = "bakon3/multigethx86";
-  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "ETC")) {
-    var dockerImage = "bakon3/multigetharm";
-  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "kotti")) {
-    var dockerImage = "bakon3/multigetharm";
-  } else if (cpu === "arm" || (cpu === "arm64" && nodeNetwork === "ethnet")) {
+  } else if (cpu === "armhf") {
+    var dockerImage = "bakon3/multigetharmpi";
+  } else if (cpu === "arm64") {
     var dockerImage = "bakon3/multigetharm";
   } else {
-    var dockerImage = "bakon3/multigetharm";
+    var dockerImage = "bakon3/multigethx86";
   }
   if (nodeNetwork === "ethnet") {
     var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/";
