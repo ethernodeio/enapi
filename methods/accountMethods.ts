@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import Account from "../models/account";
 import bcrypt from "bcrypt";
 import { checkJWT } from "../middleware/checkauth";
-
 // #######################################
 //       ####ACCOUNT METHODS ####
 // #######################################
@@ -12,22 +11,20 @@ export const createUser: CreateUser = async (userName, password, userRole) => {
   const newUser = await dbCreateUser(userName, password, userRole);
   return newUser;
 };
-
 export const login: Login = async (userName, password) => {
   const userLogin = await dbUserLogin(userName, password);
   return userLogin;
 };
-
 export const getUser: GetUser = async (JWTtoken, userName) => {
+  await checkJWT(JWTtoken);
   const getUserInfo = await dbGetUser(JWTtoken, userName);
   return getUserInfo;
 };
-
 export const deleteUser: DeleteUser = async (JWTtoken, userId) => {
+  await checkJWT(JWTtoken);
   const deleUser = await dbDeleteUser(JWTtoken, userId);
   return deleUser;
-}
-
+};
 // #######################################
 //   ####FUNCTIONSFOR ACCOUNT METHODS ####
 // #######################################
@@ -47,7 +44,6 @@ const dbCreateUser = async (userName: string, password: string, userRole: string
     return { status: "success", message: "account Created" };
   }
 };
-
 const dbDeleteUser = async (JWTtoken: string, userId: string): Promise<any> => {
   try {
     const result = await Account.findOneAndDelete({ _id: userId });
@@ -57,7 +53,6 @@ const dbDeleteUser = async (JWTtoken: string, userId: string): Promise<any> => {
     console.log(err);
   }
 };
-
 const dbUserLogin = async (userName: string, password: string): Promise<any> => {
   const result = await Account.find({ userName }).exec();
   if (result.length > 0) {
@@ -77,9 +72,7 @@ const dbUserLogin = async (userName: string, password: string): Promise<any> => 
     throw new Error("Auth Error");
   }
 };
-
 const dbGetUser = async (JWTtoken: string, userName: string): Promise<any> => {
-  await checkJWT(JWTtoken);
   console.log("Getting user");
   const result = await Account.findOne({ userName }).select("-password").exec();
   return result;

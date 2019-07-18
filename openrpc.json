@@ -19,6 +19,10 @@
     {
       "name": "enApi http end point",
       "url": "https://localhost:8080"
+    },
+    {
+      "name": "enApi websocket end point ",
+      "url": "https://localhost:8005"
     }
   ],
   "methods": [
@@ -475,6 +479,9 @@
         },
         {
           "$ref": "#/components/contentDescriptors/nodeName"
+        },
+        {
+          "$ref": "#/components/contentDescriptors/removeNodeData"
         }
       ],
       "result": {
@@ -898,6 +905,15 @@
         "schema": {
           "title": "web3params",
           "type": "array"
+        }
+      },
+      "removeNodeData": {
+        "name": "removeNodeData",
+        "description": "pass boolean to let api know if node data should be removed when deleting the node: default is yes",
+        "required": true,
+        "schema": {
+          "title": "removeNodeData",
+          "type": "boolean"
         }
       }
     },

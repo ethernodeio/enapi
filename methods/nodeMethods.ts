@@ -1,26 +1,27 @@
-import { AddNode, RemoveNode, GetNodeContainerInfo, StringFR9VhzBk } from "../__GENERATED_TYPES__/index.js";
+import { AddNode, RemoveNode, GetNodeContainerInfo } from "../__GENERATED_TYPES__/index.js";
 import os, { networkInterfaces } from "os";
-import mongoose from "mongoose";
 import Account from "../models/account";
 import Docker from "dockerode";
-import { promises } from "fs";
+import { exec } from "child_process";
+import { checkJWT } from "../middleware/checkauth";
 const docker = new Docker({ socketPath: "/var/run/docker.sock" });
 const cpu = os.arch();
 const ram = os.totalmem();
-
 // #######################################
 //          ####NODE METHODS ####
 // #######################################
 export const addNode: AddNode = async (JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi) => {
+  await checkJWT(JWTtoken);
   const newNode = await dbCreateNode(JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi);
   return newNode;
 };
-
-export const removeNode: RemoveNode = async (JWTtoken, userName, containerId, nodeName) => {
-  const removeContainer = await dbRemoveNode(JWTtoken, userName, containerId, nodeName);
+export const removeNode: RemoveNode = async (JWTtoken, userName, containerId, nodeName, removeNodeData) => {
+  await checkJWT(JWTtoken);
+  const removeContainer = await dbRemoveNode(JWTtoken, userName, containerId, nodeName, removeNodeData);
   return removeContainer;
 };
 export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, containerId): Promise<any> => {
+  await checkJWT(JWTtoken);
   return new Promise((resolve, reject) => {
     docker.getContainer(containerId).inspect((err, data: { Id: string, Created: string, State: { Status: string }, NetworkSettings: { Ports: any } }) => {
       if (err) {
@@ -38,7 +39,6 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
     });
   });
 };
-
 // #######################################
 //   ####MODELS FOR NODE METHODS ####
 // #######################################
@@ -171,8 +171,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   });
   return { status: "success", message: "Node Added" };
 };
-
-const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string): Promise<any> => {
+const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string, removeNodeData: boolean): Promise<any> => {
   const nodeName1 = nodeName.replace(/\s/g, "");
   docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
     // console.log("container removed: " + data);
@@ -181,6 +180,20 @@ const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: str
       throw new Error(err);
     }
     await Account.updateOne({ userName }, { $pull: { nodes: { nodeId: containerId } } }).exec();
+    if (removeNodeData === true) {
+      console.log("removing node data from host");
+      const dir = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/";
+      exec("rm -rf " + dir, (error: any, stdout: any, stderr: any) => {
+        // console.log('stdout: ' + stdout);
+        // console.log('stderr: ' + stderr);
+        if (error !== null) {
+          console.log("exec error: " + error);
+          throw new Error(error);
+        }
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
+      });
+    }
   });
   return {
     status: "success",
