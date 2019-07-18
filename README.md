@@ -1,6 +1,6 @@
 enAPI nodeJS json-rpc 2.0 API and tools to easily spin up blockchain nodes and build dapps on top of.
 
-Please check out the enApi docs in the OpenRPC playground: [DOCS](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/enapi/master/openrpc.json&uiSchema%5BappBar%5D%5Bui:title%5D=EnOS&uiSchema%5BappBar%5D%5Bui:logoUrl%5D=https://ethernode.io/static/media/Header_Solid.6b36a7a0.svg&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:darkMode%5D=true)
+Please check out the enApi docs in the OpenRPC playground: [DOCS](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/enapi/master/openrpc.json&uiSchema%5BappBar%5D%5Bui:title%5D=enApi&uiSchema%5BappBar%5D%5Bui:logoUrl%5D=https://ethernode.io/static/media/Header_Solid.6b36a7a0.svg&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:darkMode%5D=true)
 
 To start using enAPI today, you will need a linux distribution, like Ubuntu.
 
