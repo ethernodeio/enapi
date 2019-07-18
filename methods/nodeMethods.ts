@@ -5,9 +5,12 @@ import Docker from "dockerode";
 import { exec } from "child_process";
 import { checkJWT } from "../middleware/checkauth";
 const docker = new Docker({ socketPath: "/var/run/docker.sock" });
-
 const cpu = os.arch();
 const ram = os.totalmem();
+console.log("CPU Arch: " + cpu);
+console.log("Host RAM: " + ram);
+console.log("enAPI Ready to start Blockchain Nodes");
+
 // #######################################
 //          ####NODE METHODS ####
 // #######################################
