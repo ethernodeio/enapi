@@ -1,38 +1,28 @@
 #!/bin/sh
 echo '\e[92m#################################################'
-echo              'Installin EnOs stuff'
+echo              'Updating and Installing'
 echo '#################################################\e[0m'
 sudo apt update -y &&
 sudo apt upgrade -y &&
 sudo apt install -y build-essential &&
 sudo apt install -y software-properties-common &&
-sudo apt install -y git &&
-sudo apt install -y wget && 
-sudo apt install -y curl &&
-sudo apt install -y redis-server &&
-sudo apt install -y gyp &&
-sudo apt install -y mongodb &&
-sudo apt install -y golang-go &&
-sudo apt install -y nodejs &&
-sudo apt install -y npm &&
-sudo apt install -y ntp &&
-sudo apt install -y gcc &&
-sudo apt install -y make &&
+sudo apt install -y git wget curl redis-server gyp mongodb golang-go nodejs npm ntp gcc make &&
 sudo apt update -y &&
 sudo apt upgrade -y &&
 echo
 echo '\e[92m#################################################'
-echo           'Installing docker for arm'
+echo 							'Installing Docker for Ubuntu'
 echo '#################################################\e[0m'
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - &&
-sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" &&
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" &&
 sudo apt-get update &&
 sudo apt-cache policy docker-ce &&
 sudo apt-get install -y docker-ce make &&
+sudo usermod -aG docker $USER
 echo '\e[92m################################################'
-echo 				'Pulling Docker Images for multi-geth ARM'
+echo 				'Pulling Docker Images for multi-geth x86'
 echo '#################################################\e[0m'
-sudo docker pull bakon3/multigetharm &&
+sudo docker pull bakon3/multigethx86 &&
 echo '\e[92m################################################'
 echo 				'Installing certbot to secure it all'
 echo '#################################################\e[0m'
