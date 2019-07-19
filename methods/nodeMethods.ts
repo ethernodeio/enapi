@@ -1,5 +1,5 @@
 import { AddNode, RemoveNode, GetNodeContainerInfo } from "../__GENERATED_TYPES__/index.js";
-import os, { networkInterfaces } from "os";
+import os from "os";
 import Account from "../models/account";
 import Docker from "dockerode";
 import { exec } from "child_process";
