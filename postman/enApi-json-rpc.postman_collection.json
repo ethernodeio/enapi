@@ -1,0 +1,734 @@
+{
+	"info": {
+		"_postman_id": "91f6d050-5a53-48a5-a55f-fca58758da92",
+		"name": "enApi-json-rpc",
+		"description": "EnOS API/SDK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "accountRPC",
+			"item": [
+				{
+					"name": "createAccount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"createUser\",\n    \"params\": [ \n    \t\"bakon\", \n    \t\"test\", \n    \t\"admin\" \n    \t],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "create user account on EnOS system\n\n{\n \"jsonrpc\": \"2.0\",\n    \"method\": \"createAccount\",\n    \"params\": [ userName, password ]\n}"
+					},
+					"response": [
+						{
+							"name": "createAccount",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/javascript",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t \"jsonrpc\": \"2.0\",\n    \"method\": \"createAccount\",\n    \"params\": [ \"bakon\", \"test\" ]\n}"
+								},
+								"url": {
+									"raw": "https://192.168.1.140:3030/accountRPC/accounts",
+									"protocol": "https",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"140"
+									],
+									"port": "3030",
+									"path": [
+										"accountRPC",
+										"accounts"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"login\",\n    \"params\": [ \n    \t\"bakon\", \n    \t\"test\" \n    \t],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "check provided credentials and return user info on succe"
+					},
+					"response": []
+				},
+				{
+					"name": "checkForUsers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"checkForUsers\",\n    \"params\": [  ],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{enkeep}}/accountRPC/usrAdmin",
+							"host": [
+								"{{enkeep}}"
+							],
+							"path": [
+								"accountRPC",
+								"usrAdmin"
+							]
+						},
+						"description": "Get info about provided user name"
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWNmMzFmOGMwNWY4MzkwMDMxOGMyYWE3IiwiaWF0IjoxNTU5NDM3MjQ5fQ.nYwxZo0ivydD_vdXKlHytq0DW1uTf8s_mYdFj4dexFg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"getUser\",\n    \"params\": [ \n    \t\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQzMGRmYTdiNjhhZmMyOGE2Y2RlZWVmIiwiaWF0IjoxNTYzNDg0MDgwfQ.RckXBKuXo-KHIpftwBApMOPgfJn-LbBenLOtwX-mrhc\", \n    \t\"bakon\"\n    \t],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "Get info about provided user name"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "BEARER eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWNmMzFmOGMwNWY4MzkwMDMxOGMyYWE3IiwiaWF0IjoxNTU5NDM3MjQ5fQ.nYwxZo0ivydD_vdXKlHytq0DW1uTf8s_mYdFj4dexFg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"deleteUser\",\n    \"params\": [ \n    \t\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQyNDRjZDRkNWZjZjQ3MjNkZjk1MjNjIiwiaWF0IjoxNTYyNjYwMDU3fQ.Pt4aZvmEip226P3rp75UtPamjqTuZTqcy4UH9vEzKTk\", \n    \t\"5d2fe2d6b68afc28a6cdeeee\"\n    ],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "account managment methods.\n\nFor account managment just add /accountRPC/ to the end of your doman and you cna use the acocunt methods."
+		},
+		{
+			"name": "nodesRPC",
+			"item": [
+				{
+					"name": "addNode",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "BEARER",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jsonrpc\": \"2.0\",\n    \"method\": \"addNode\",\n    \"params\": [ \n    \t\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQzMGRmYTdiNjhhZmMyOGE2Y2RlZWVmIiwiaWF0IjoxNTYzNDg0MDgwfQ.RckXBKuXo-KHIpftwBApMOPgfJn-LbBenLOtwX-mrhc\", \n    \t\"bakon\", \n    \t\"classic\", \n    \t\"classic\", \n    \t\"fast\", \n    \t\"true\", \n    \t\"true\" \n    \t],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "Get info about provided user name"
+					},
+					"response": []
+				},
+				{
+					"name": "getNodeContainerInfo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"getNodeContainerInfo\",\n    \"params\": [\n    \t\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQyZjgxMzRkNTE3MjYwNTgwMzVmN2ZiIiwiaWF0IjoxNTYzMzk2OTE4fQ.0yH7EWh3lBezDqMaAkq3TAr5_d41BQpB-9d3CCuL2_4\",\n        \"e75c1ba526486b0d4036e19f9f26decf23154b36538457fc7798d88f87d9d792\"\n    ],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "Get info about provided user name"
+					},
+					"response": []
+				},
+				{
+					"name": "removeNode",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"removeNode\",\n    \"params\": [\n    \t\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX0lkIjoiNWQyZjgxMzRkNTE3MjYwNTgwMzVmN2ZiIiwiaWF0IjoxNTYzMzk2OTE4fQ.0yH7EWh3lBezDqMaAkq3TAr5_d41BQpB-9d3CCuL2_4\",\n        \"bakon\",\n        \"d666f3b67066b58bd27bc18ba6d5f6dfdc5aca7f2c7f793efcf4de807aa93d7c\",\n        \"kotti\",\n        true\n    ],\n    \"id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:8080",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						},
+						"description": "Stop and remove lected node"
+					},
+					"response": []
+				}
+			],
+			"description": "EnOS Node Admin Json-RPC API"
+		},
+		{
+			"name": "ethRPC",
+			"item": [
+				{
+					"name": "web3",
+					"item": [
+						{
+							"name": "ethRpcCall-clientVersion",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"net_version\",\n        [],\n        32\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns the current client version.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`String` - The current client version"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-sha3",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"jsonrpc\":\"2.0\",\n\t\"method\":\"ethRpcCall\",\n\t\"params\": [\n\t\t\"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"web3_sha3\",\n\t\t[\"0x68656c6c6f20776f726c64\"],\n\t\t11\n\t],\n\t\"id\":64\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns Keccak-256 (not the standardized SHA3-256) of the given data.\r\n\r\n**Parameters**\r\n\r\n`DATA` - the data to convert into a SHA3 hash\r\n\r\n```\r\nparams: [\r\n  \"0x68656c6c6f20776f726c64\"\r\n]\r\n```\r\n\r\n**Returns**\r\n\r\n`DATA` - The SHA3 result of the given string."
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-net_version",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\": \"ethRpcCall\",\n\t\"params\": [\n\t\t\"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"net_version\",\n\t\t[],\n\t\t11\n\t],\n\t\"id\":64\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns the current network id.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`String` - The current network id.\r\n\r\n`\"1\"`: Ethereum Mainnet\r\n\r\n`\"2\"`: Morden Testnet (deprecated)\r\n\r\n`\"3\"`: Ropsten Testnet\r\n\r\n`\"4\"`: Rinkeby Testnet\r\n\r\n`\"6\"`: Kotti ETC Testnet\r\n\r\n`\"42\"`: Kovan Testnet"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-net_listening",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"net_listening\",\n        [],\n        32\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns `true` if client is actively listening for network connections.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`Boolean` - `true` when listening, otherwise `false`."
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-net_peerCount",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"net_peerCount\",\n        [],\n        32\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns number of peers currently connected to the client.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`QUANTITY` - integer of the number of connected peers."
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-protocolVersion",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"jsonrpc\":\"2.0\",\n\t\"method\":\"ethRpcCall\",\n\t\"params\":[\n\t\t\"bakon\",\n\t\t\"kotti\",\n\t\t\"kotti\",\n\t\t\"eth_protocolVersion\",\n\t\t[],\n\t\t32\n\t],\n\t\"id\":67\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns the current ethereum protocol version.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`String` - The current ethereum protocol version"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-syncing",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"jsonrpc\":\"2.0\",\n\t\"method\":\"ethRpcCall\",\n\t\"params\":[\n\t\t\"bakon\",\n\t\t\"kotti\",\n\t\t\"kotti\",\n\t\t\"eth_syncing\",\n\t\t[],\n\t\t32\n\t],\n\t\"id\":67\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns an object with data about the sync status or false.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`Object|Boolean`, An object with sync status data or `FALSE`, when not syncing:\r\n\r\n`startingBlock`: `QUANTITY` - The block at which the import started (will only be reset, after the sync reached his head)\r\n`currentBlock`: `QUANTITY` - The current block, same as eth_blockNumber\r\n`highestBlock`: `QUANTITY` - The estimated highest block"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-coinbase",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"jsonrpc\":\"2.0\",\n\t\"method\":\"ethRpcCall\",\n\t\"params\":[\n\t\t\"bakon\",\n\t\t\"kotti\",\n\t\t\"kotti\",\n\t\t\"eth_coinbase\",\n\t\t[],\n\t\t32\n\t],\n\t\"id\":67\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Returns the client coinbase address.\r\n\r\n**Parameters**\r\n\r\nnone\r\n\r\n**Returns**\r\n\r\n`DATA`, 20 bytes - the current coinbase address."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "shh",
+					"item": [
+						{
+							"name": "ethRpcCall-shh_version",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_info\",\n        [],\n        11\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "localhost:8080",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "shh_version\r\nReturns the current semver version number.\r\n\r\nParameters\r\nnone\r\n\r\nReturns\r\nString - The version number.\r\n\r\nExample\r\n// Request\r\ncurl -X POST --data '{\r\n\"jsonrpc\":\"2.0\",\r\n\"method\":\"shh_version\",\r\n\"params\":[],\r\n\"id\":1\r\n}'\r\n\r\n// Result\r\n{\r\n  \"id\":1,\r\n  \"jsonrpc\": \"2.0\",\r\n  \"result\": \"6.0\"\r\n}"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_generateSymKeyFromPassword",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_generateSymKeyFromPassword\",\n        [\"test\"],\n        32\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								},
+								"description": "Make web3 call to your node"
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_addSymKey",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_addSymKey\",\n        [\"0x2a6953adc48553d1463a9b30fb4a85cc25831127776b3b3fa87b70492436a8f2\"],\n        32\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_newKeyPair",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_newKeyPair\",\n        [],\n        56\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_post",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_post\",\n        [{\n\t\t  \"symKeyID\": \"7d7ae10ad10af2a994b676b9aa6c5d278473253a3485a600004e359dd4afa23c\",\n\t\t  \"sig\": \"5d979032c13a4b002c29a36051943ac22f3759e13627d43a8a228729b8f9455c\",\n\t\t  \"ttl\": 7,\n\t\t  \"topic\": \"0x07678231\",\n\t\t  \"payload\": \"0x68656c6c6f\",\n\t\t  \"powTarget\": 3.01,\n\t\t  \"powTime\": 3\n\t\t  }],\n\t\t  12\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_subscribe",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_subscribe\",\n        [\"messages\", \n\t{\n\t\t\"topics\": [\"0x07678231\"],\n\t\t\"symKeyID\": \"a24c535b2260686341812531f2fa2ea8db50633c78f71554e0f61e3ec128c685\"\n\t}]\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_newMessageFilter",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"kotti\",\n        \"kotti\",\n        \"shh_newMessageFilter\",\n        [{\n\t\t\"symKeyID\": \"a24c535b2260686341812531f2fa2ea8db50633c78f71554e0f61e3ec128c685\"\n\t}]\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ethRpcCall-shh_getFilterMessages",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"ethRpcCall\",\n    \"params\": [\n        \"bakon\",\n        \"eth\",\n        \"ethnet\",\n        \"shh_getFilterMessages\",\n        [\"0d2d8939a08f4df794d641cda63bd82687545cc6505f6419e275bd349f1328c6\"]\n    ],\n    \"id\": 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080"
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "make web3 json-rpc calls to your node to query the node for block chain data.\n\nUtilizing the EnOS API to access the node gives you extra security over ICP.\n\nIf you would like yo query your nodes directly please see the read me file on how to use the node ip addess and port number."
+		}
+	]
+}

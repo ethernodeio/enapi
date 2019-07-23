@@ -695,7 +695,7 @@
         },
         {
           "name": "rpcId",
-          "description": "rpc Id",
+          "description": "jason-rpc 3.0 spec Id for call",
           "required": true,
           "schema": {
             "type": "number"
