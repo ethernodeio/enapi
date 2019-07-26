@@ -24,6 +24,15 @@ echo 				'Pulling Docker Images for multi-geth x86'
 echo '#################################################\e[0m'
 sudo docker pull bakon3/multigethx86 &&
 echo '\e[92m################################################'
+echo 	    'Creating Directories for Persistent Storage'
+echo '#################################################\e[0m'
+sudo mkdir -p /media/ssd/.multigeth &&
+echo '\e[92m################################################'
+echo 	    'Creating Directories for Persistent Storage'
+echo '#################################################\e[0m'
+sudo npm run typings &&
+sudo npm install &&
+echo '\e[92m################################################'
 echo 				'Installing certbot to secure it all'
 echo '#################################################\e[0m'
 sudo add-apt-repository ppa:certbot/certbot -y &&
