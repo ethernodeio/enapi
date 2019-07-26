@@ -6,6 +6,9 @@ enAPI nodeJS json-rpc 2.0 API and tools to easily spin up blockchain nodes and b
 
 Please check out the enApi docs in the OpenRPC playground: [DOCS](https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethernodeio/enapi/master/openrpc.json&uiSchema%5BappBar%5D%5Bui:title%5D=enApi&uiSchema%5BappBar%5D%5Bui:logoUrl%5D=https://raw.githubusercontent.com/ethernodeio/enapi/dev/logo.png&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:darkMode%5D=true)
 
+How to install enApi on Ubuntu 18.04 LTS
+https://www.youtube.com/watch?v=Vfd4PstITT8
+
 Check out our enAPI video on youtube for further isntructions and enApi walkthrough: 
 https://www.youtube.com/watch?v=pPru-z2o8es
 
