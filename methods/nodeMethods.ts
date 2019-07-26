@@ -30,14 +30,25 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
     docker.getContainer(containerId).inspect((err, data: { Id: string, Created: string, State: { Status: string }, NetworkSettings: { Ports: any } }) => {
       if (err) {
         console.log(err);
-        return resolve(err);
+        throw new Error(err);
       }
+      if (data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort) {
+        var rpcPort: any = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
+      } else {
+        var rpcPort: any = "disabled";
+      }
+      if (data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort) {
+        var wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
+      } else {
+        var wsPort: any = "disabled";
+      }
+
       let selected = [{
         containerID: data.Id,
         containerCreated: data.Created,
         containerState: data.State.Status,
-        rpcPort: data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort,
-        wsPort: data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort,
+        rpcPort,
+        wsPort,
       }];
       resolve(selected);
     });
