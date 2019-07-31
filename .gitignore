@@ -1,6 +1,8 @@
 node_modules
 coverage
 build
+rust
+typescript
 docs
 .DS_Store
 dist
