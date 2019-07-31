@@ -53,15 +53,35 @@ jobs:
   release:
     <<: *defaults
     docker:
-      - image: circleci/node:10
+      - image: circleci/rust:1.35-stretch
     steps:
       - checkout
-      - restore_cache: *restore-deps-cache
+      - run:
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.15.3-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
       - run: npm install
-      - run: npm run build
-      - run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/npm @semantic-release/commit-analyzer @semantic-release/release-notes-generator @qiwi/semantic-release-gh-pages-plugin
-      - run: ./node_modules/.bin/semantic-release
-      - save_cache: *save-deps-cache
+      - run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github @semantic-release/npm @semantic-release/commit-analyzer @semantic-release/release-notes-generator @open-rpc/semantic-release-plugin @semantic-release/exec
+      - run: git checkout .
+      - run: npx semantic-release
+  release_elasticbeanstalk:
+    <<: *defaults
+    docker:
+      - image: circleci/python:3.7-stretch
+    steps:
+      - checkout
+      - run:
+          name: Installing deployment dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python-pip python-dev build-essential
+            sudo pip install --upgrade setuptools
+            sudo pip install awsebcli --upgrade
+      - run:
+          name: Deploying
+          command: eb deploy MyApp-env
 
 workflows:
   version: 2
@@ -84,6 +104,10 @@ workflows:
           requires:
             - test
             - build
+      - release_elasticbeanstalk:
+          filters: *filter-only-master
+          requires:
+            - release
       - release:
           filters: *filter-only-master
           requires:

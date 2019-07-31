@@ -1,0 +1,1 @@
+/media/bakon/data/Dropbox\ (GeoSkyGPS)/Dev/apps/ethernode/enapi/rust/target/debug/template_client-fb881edffc210803: /media/bakon/data/Dropbox\ (GeoSkyGPS)/Dev/apps/ethernode/enapi/rust/src/lib.rs /media/bakon/data/Dropbox\ (GeoSkyGPS)/Dev/apps/ethernode/enapi/rust/src/test_harness.rs
