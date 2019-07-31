@@ -1,6 +1,6 @@
 {
   "name": "@ethernodeio/enapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "enAPI Ethereum node managment API",
   "main": "build/server.js",
   "scripts": {
