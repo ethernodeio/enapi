@@ -841,6 +841,7 @@
         "description": "JWT Token needed with this call gained on login",
         "required": true,
         "schema": {
+          "title": "JWTtoken",
           "type": "string"
         }
       },
