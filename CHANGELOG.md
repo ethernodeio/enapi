@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ethernodeio/enapi/compare/1.1.0...1.1.1) (2019-07-31)
+
+
+### Bug Fixes
+
+* corrected org name ([04b0ede](https://github.com/ethernodeio/enapi/commit/04b0ede))
+
 # [1.1.0](https://github.com/ethernodeio/enapi/compare/1.0.0...1.1.0) (2019-07-31)
 
 
