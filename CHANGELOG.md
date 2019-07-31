@@ -1,3 +1,35 @@
+# 1.0.0 (2019-07-31)
+
+
+### Bug Fixes
+
+* added link to install vid ([82b9264](https://github.com/ethernodeio/enapi/commit/82b9264))
+* added logic for starting contianer ([9e9f40c](https://github.com/ethernodeio/enapi/commit/9e9f40c))
+* added logo and changed link to playground ([fa331c7](https://github.com/ethernodeio/enapi/commit/fa331c7))
+* added logo file and fixed error with etc nodes ([31688b4](https://github.com/ethernodeio/enapi/commit/31688b4))
+* added missing pck for typings and clinet gen ([0c1321d](https://github.com/ethernodeio/enapi/commit/0c1321d))
+* added postman collection json file ([bb59e96](https://github.com/ethernodeio/enapi/commit/bb59e96))
+* additional automation added  to setup.sh ([a004ee5](https://github.com/ethernodeio/enapi/commit/a004ee5))
+* changes to setup sh files small fixes ([1fc8553](https://github.com/ethernodeio/enapi/commit/1fc8553))
+* correcte npm install and typings ([17ce2b6](https://github.com/ethernodeio/enapi/commit/17ce2b6))
+* created description ([adab0c6](https://github.com/ethernodeio/enapi/commit/adab0c6))
+* extra images small fix in nodes ([2e05af5](https://github.com/ethernodeio/enapi/commit/2e05af5))
+* fix bug with arch detection for docker image ([a9bc22f](https://github.com/ethernodeio/enapi/commit/a9bc22f))
+* fixed tslint errors add more rules ([9d658db](https://github.com/ethernodeio/enapi/commit/9d658db))
+* fixes to package.json ([48eb90a](https://github.com/ethernodeio/enapi/commit/48eb90a))
+* fixes to package.json ([bf94a39](https://github.com/ethernodeio/enapi/commit/bf94a39))
+* fixes to package.json ([8cb9fca](https://github.com/ethernodeio/enapi/commit/8cb9fca))
+* jwt token implemented, account methods added ([29a13d8](https://github.com/ethernodeio/enapi/commit/29a13d8))
+* link to playground image ([b3e149f](https://github.com/ethernodeio/enapi/commit/b3e149f))
+* logo link changed to raw link ([a901abc](https://github.com/ethernodeio/enapi/commit/a901abc))
+* playground title ([3c436b8](https://github.com/ethernodeio/enapi/commit/3c436b8))
+* rxlint test fixes ([13208fd](https://github.com/ethernodeio/enapi/commit/13208fd))
+* small fixes and changes for open source version ([39694af](https://github.com/ethernodeio/enapi/commit/39694af))
+* small fixes to delete user ([27f5c32](https://github.com/ethernodeio/enapi/commit/27f5c32))
+* updated instructions added video link ([70b64ae](https://github.com/ethernodeio/enapi/commit/70b64ae))
+* updated readme file with install instructions ([6f27938](https://github.com/ethernodeio/enapi/commit/6f27938))
+* wording fix ([8d29b09](https://github.com/ethernodeio/enapi/commit/8d29b09))
+
 ## [1.1.3](https://github.com/etclabscore/pristine-typescript-openrpc-server/compare/1.1.2...1.1.3) (2019-07-09)
 
 
