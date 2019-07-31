@@ -33,14 +33,14 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         throw new Error(err);
       }
       if (data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort) {
-        const rpcPort: any = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
+        var rpcPort = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
       } else {
-        const rpcPort: any = "disabled";
+        var rpcPort: any = "disabled";
       }
       if (data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort) {
-        const wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
+        var wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
       } else {
-        const wsPort: any = "disabled";
+        var wsPort: any = "disabled";
       }
 
       const selected = [{
@@ -102,18 +102,18 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--wsorigins=*");
   }
   if (cpu === "x64") {
-    const dockerImage = "bakon3/multigethx86";
+    var dockerImage = "bakon3/multigethx86";
   } else if (cpu === "armhf") {
-    const dockerImage = "bakon3/multigetharmpi";
+    var dockerImage = "bakon3/multigetharmpi";
   } else if (cpu === "arm64") {
-    const dockerImage = "bakon3/multigetharm";
+    var dockerImage = "bakon3/multigetharm";
   } else {
-    const dockerImage = "bakon3/multigethx86";
+    var dockerImage = "bakon3/multigethx86";
   }
   if (nodeNetwork === "ethnet") {
-    const ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/";
+    var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/";
   } else {
-    const ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/" + nodeNetwork + "/";
+    var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/" + nodeNetwork + "/";
   }
   docker.createContainer({
     Image: dockerImage,
