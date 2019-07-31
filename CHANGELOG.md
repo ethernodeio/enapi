@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ethernodeio/enapi/compare/1.0.0...1.1.0) (2019-07-31)
+
+
+### Features
+
+* fixes and new addons and features ([61f2df4](https://github.com/ethernodeio/enapi/commit/61f2df4))
+
 # 1.0.0 (2019-07-31)
 
 
