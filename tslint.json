@@ -6,8 +6,7 @@
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-console": [
-      false,
-      "log"
+      false
     ],
     "indent": [
       true,
