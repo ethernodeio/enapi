@@ -19,7 +19,7 @@ const makeRPCcall = (userName: string, nodeName: string, nodeNetwork: string, we
       // 'connect' listener
       console.log("Connected to node " + nodeName);
     });
-    var obj = {
+    const obj = {
       jsonrpc: "2.0",
       method: web3callMethod,
       params: [...web3callParams],
@@ -29,7 +29,7 @@ const makeRPCcall = (userName: string, nodeName: string, nodeNetwork: string, we
       console.log("Call to node made.");
     });
     client.on("data", (data: any) => {
-      let result = JSON.parse(data);
+      const result = JSON.parse(data);
       resolve(result);
       console.log(result);
       // client.end();

@@ -33,17 +33,17 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         throw new Error(err);
       }
       if (data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort) {
-        var rpcPort: any = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
+        const rpcPort: any = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
       } else {
-        var rpcPort: any = "disabled";
+        const rpcPort: any = "disabled";
       }
       if (data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort) {
-        var wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
+        const wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
       } else {
-        var wsPort: any = "disabled";
+        const wsPort: any = "disabled";
       }
 
-      let selected = [{
+      const selected = [{
         containerID: data.Id,
         containerCreated: data.Created,
         containerState: data.State.Status,
@@ -102,18 +102,18 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--wsorigins=*");
   }
   if (cpu === "x64") {
-    var dockerImage = "bakon3/multigethx86";
+    const dockerImage = "bakon3/multigethx86";
   } else if (cpu === "armhf") {
-    var dockerImage = "bakon3/multigetharmpi";
+    const dockerImage = "bakon3/multigetharmpi";
   } else if (cpu === "arm64") {
-    var dockerImage = "bakon3/multigetharm";
+    const dockerImage = "bakon3/multigetharm";
   } else {
-    var dockerImage = "bakon3/multigethx86";
+    const dockerImage = "bakon3/multigethx86";
   }
   if (nodeNetwork === "ethnet") {
-    var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/";
+    const ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/";
   } else {
-    var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/" + nodeNetwork + "/";
+    const ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/" + nodeNetwork + "/";
   }
   docker.createContainer({
     Image: dockerImage,
