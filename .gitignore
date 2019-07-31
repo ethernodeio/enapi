@@ -6,3 +6,5 @@ docs
 dist
 __GENERATED_TYPES__
 /**/build
+rust
+typescript
