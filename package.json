@@ -1,12 +1,12 @@
 {
-  "name": "@ethernode/enapi",
-  "version": "1.0.1",
+  "name": "@ethernodeio/enapi",
+  "version": "1.0.2",
   "description": "enAPI Ethereum node managment API",
   "main": "build/server.js",
   "scripts": {
     "start": "npm run typings && tsc && node build/server.js",
     "build": "npm run typings && tsc",
-    "generator-client": "open-rpc-generator-client --ts-name=@ethernode/ethernode-enapi-client --rs-name=ethernode-enapi-client -o build/",
+    "generator-client": "open-rpc-generator-client --ts-name=@ethernodeio/enapi-client --rs-name=enapi-client -o build/",
     "lint": "tslint --fix -p .",
     "test": "npm run typings && npm run lint && jest --coverage --passWithNoTests",
     "typings": "open-rpc-typings --output-ts __GENERATED_TYPES__"
