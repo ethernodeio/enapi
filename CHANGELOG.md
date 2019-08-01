@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/ethernodeio/enapi/compare/1.1.1...1.1.2) (2019-08-01)
+
+
+### Bug Fixes
+
+* changed name of client for generator ([75b39e6](https://github.com/ethernodeio/enapi/commit/75b39e6))
+
 ## [1.1.1](https://github.com/ethernodeio/enapi/compare/1.1.0...1.1.1) (2019-07-31)
 
 
