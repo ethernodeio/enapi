@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run typings && tsc && node build/server.js",
     "build": "npm run typings && tsc",
-    "generator-client": "open-rpc-generator-client --ts-name=@ethernode/ethernode-enapi-client --rs-name=ethernode-enapi-client -o build/",
+    "generator-client": "open-rpc-generator-client --ts-name=@ethernode/enapi-client --rs-name=enapi-client -o build/",
     "lint": "tslint --fix -p .",
     "test": "npm run typings && npm run lint && jest --coverage --passWithNoTests",
     "typings": "open-rpc-typings --output-ts __GENERATED_TYPES__"
