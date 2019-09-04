@@ -9,6 +9,7 @@ import { checkJWT } from "../middleware/checkauth";
 // #######################################
 export const createUser: CreateUser = async (userName, password, userRole) => {
   const newUser = await dbCreateUser(userName, password, userRole);
+  console.log(newUser);
   return newUser;
 };
 export const login: Login = async (userName, password) => {
