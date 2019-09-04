@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/ethernodeio/enapi/compare/1.1.2...1.1.3) (2019-09-04)
+
+
+### Bug Fixes
+
+* added console logs stuff for debugging backend ([38e56d1](https://github.com/ethernodeio/enapi/commit/38e56d1))
+
 ## [1.1.2](https://github.com/ethernodeio/enapi/compare/1.1.1...1.1.2) (2019-08-01)
 
 
