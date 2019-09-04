@@ -26,7 +26,7 @@ export const deleteUser: DeleteUser = async (JWTtoken, userId) => {
   return deleUser;
 };
 // #######################################
-//   ####FUNCTIONSFOR ACCOUNT METHODS ####
+//   ####FUNCTIONS FOR ACCOUNT METHODS ####
 // #######################################
 const dbCreateUser = async (userName: string, password: string, userRole: string): Promise<any> => {
   const result = await Account.find({ userName }).exec();
@@ -40,7 +40,7 @@ const dbCreateUser = async (userName: string, password: string, userRole: string
       password: hash,
       userRole,
     });
-    account.save();
+    await account.save();
     return { status: "success", message: "account Created" };
   }
 };

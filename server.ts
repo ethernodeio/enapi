@@ -1,6 +1,5 @@
 import { Server, IServerOptions } from "@open-rpc/server-js";
 import { Router } from "@open-rpc/server-js";
-import { OpenRPC } from "@open-rpc/meta-schema";
 import { IHTTPServerTransportOptions } from "@open-rpc/server-js/build/transports/http";
 import { IWebSocketServerTransportOptions } from "@open-rpc/server-js/build/transports/websocket";
 import openrpcDocument from "./openrpc.json";
@@ -10,7 +9,7 @@ import { sol_compile } from "./methods/solidityMethods";
 import { ethRpcCall } from "./methods/ethrpcMethods";
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost/enos", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/enapi", { useNewUrlParser: true });
 
 const methods = {
   createUser,
