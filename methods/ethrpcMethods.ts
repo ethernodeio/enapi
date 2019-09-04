@@ -13,7 +13,7 @@ export const ethRpcCall: EthRpcCall = async (userName, nodeName, nodeNetwork, we
 //    ####IPC Client for MultiGeth ####
 // #######################################
 // tslint:disable-next-line: max-line-length
-const makeRPCcall = (userName: string, nodeName: string, nodeNetwork: string, web3callMethod: string, web3callParams: any[], rpcId: number): Promise<any> => {
+const makeRPCcall = async (userName: string, nodeName: string, nodeNetwork: string, web3callMethod: string, web3callParams: any[], rpcId: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const client = net.createConnection({ path: "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/geth.ipc" }, () => {
       // 'connect' listener

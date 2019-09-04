@@ -1,5 +1,5 @@
 {
-  "openrpc": "1.0.0-rc1",
+  "openrpc": "1.0.0",
   "info": {
     "version": "1.0.1",
     "title": "enAPI OpenRPC json-rpc API",

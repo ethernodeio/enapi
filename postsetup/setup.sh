@@ -31,7 +31,6 @@ echo '\e[92m################################################'
 echo 	    'Creating Directories for Persistent Storage'
 echo '#################################################\e[0m'
 sudo npm install &&
-sudo npm run typings &&
 echo '\e[92m################################################'
 echo 				'Installing certbot to secure it all'
 echo '#################################################\e[0m'

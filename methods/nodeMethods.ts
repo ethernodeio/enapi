@@ -115,7 +115,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   } else {
     var ipcPath = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/" + nodeNetwork + "/:/root/.ethereum/" + nodeNetwork + "/";
   }
-  docker.createContainer({
+  const createContainer = await docker.createContainer({
     Image: dockerImage,
     name: userName + "-" + nodeName,
     AttachStdin: false,
@@ -167,7 +167,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
       }
       const dbAddNodeInfo = await Account.updateOne({ userName }, { $push: { nodes: { nodeId: result.Id, nodeName, nodeNetwork } } }).exec();
       console.log(dbAddNodeInfo);
-      docker.getContainer(result.Id).start((error, data) => {
+      docker.getContainer(result.Id).start((error, containerResult) => {
         if (err) {
           console.log(error);
           throw new Error(error);
@@ -178,23 +178,18 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     console.log(error);
     throw new Error(error);
   });
-  return { status: "success", message: "Node Added" };
+  return { status: "success", message: "Stuff" };
 };
 const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string, removeNodeData: boolean): Promise<any> => {
-  const nodeName1 = nodeName.replace(/\s/g, "");
-  docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
-    // console.log("container removed: " + data);
+  await docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
     if (err) {
       console.log(err);
       throw new Error(err);
     }
-    await Account.updateOne({ userName }, { $pull: { nodes: { nodeId: containerId } } }).exec();
     if (removeNodeData === true) {
       console.log("removing node data from host");
       const dir = "/media/ssd/.multigeth/" + userName + "/" + nodeName + "/";
       exec("rm -rf " + dir, (error: any, stdout: any, stderr: any) => {
-        // console.log('stdout: ' + stdout);
-        // console.log('stderr: ' + stderr);
         if (error !== null) {
           console.log("exec error: " + error);
           throw new Error(error);
@@ -204,6 +199,7 @@ const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: str
       });
     }
   });
+  await Account.updateOne({ userName }, { $pull: { nodes: { nodeId: containerId } } }).exec();
   return {
     status: "success",
     message: "Node Removed",
