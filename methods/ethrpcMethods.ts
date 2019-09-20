@@ -39,7 +39,7 @@ const makeRPCcall = async (userName: string, nodeName: string, nodeNetwork: stri
     });
     client.on("error", (err: string) => {
       console.log("json rpc call can has error: " + err);
-      return ("erorr");
+      return ("error");
     });
   });
 };
