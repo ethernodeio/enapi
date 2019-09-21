@@ -32,7 +32,8 @@ const makeRPCcall = async (userName: string, nodeName: string, nodeNetwork: stri
       const result = JSON.parse(data);
       resolve(result);
       console.log(result);
-      // client.end();
+      // disable for streams or web sockets
+      client.end();
     });
     client.on("end", () => {
       console.log("Disconnected from node.");
