@@ -83,11 +83,11 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   }
 
   if (syncType === "" || syncType === undefined) {
-    geth.push("--syncmode=full");
+    geth.push(" --syncmode full");
   } else if (syncType === "archive") {
-    geth.push("--syncmode=full --gcmode=archive");
+    geth.push(" --syncmode full" + " --gcmode archive");
   } else {
-    geth.push("--syncmode=" + syncType);
+    geth.push(" --syncmode " + syncType);
   }
 
   if (bootnodes) {
