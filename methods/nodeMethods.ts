@@ -86,7 +86,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--syncmode=full");
   } else if (syncType === "archive") {
     geth.push("--syncmode=full");
-    geth.push("--gcmode archive");
+    geth.push("--gcmode=archive");
   } else {
     geth.push(" --syncmode " + syncType);
   }
