@@ -76,6 +76,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--shh",
     "--verbosity=3",
     "--maxpeers=" + maxpeers,
+    "--cache=4072",
   ];
 
   if (nodeNetwork !== "ethnet") {
@@ -83,12 +84,12 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   }
 
   if (syncType === "" || syncType === undefined) {
-    geth.push("--syncmode=full");
+    geth.push("--syncmode=full ");
   } else if (syncType === "archive") {
     geth.push("--syncmode=full");
     geth.push("--gcmode=archive");
   } else {
-    geth.push(" --syncmode " + syncType);
+    geth.push("--syncmode=" + syncType);
   }
 
   if (bootnodes) {
