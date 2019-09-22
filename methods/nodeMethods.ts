@@ -76,7 +76,9 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--shh",
     "--verbosity=3",
     "--maxpeers=" + maxpeers,
-    "--cache=4072",
+    "--cache=2072",
+    "--lightserv=90",
+    "--rpcvhosts=*",
   ];
 
   if (nodeNetwork !== "ethnet") {
