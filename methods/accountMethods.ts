@@ -1,4 +1,5 @@
 import { CreateUser, DeleteUser, Login, GetUser } from "../__GENERATED_TYPES__/index.js";
+import { JSONRPCError } from "@open-rpc/server-js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import Account from "../models/account";
@@ -32,7 +33,7 @@ export const deleteUser: DeleteUser = async (JWTtoken, userId) => {
 const dbCreateUser = async (userName: string, password: string, userRole: string): Promise<any> => {
   const result = await Account.find({ userName }).exec();
   if (result.length > 0) {
-    throw new Error("User Exists");
+    throw new JSONRPCError("error", 420, "user exists");
   } else {
     const hash = await bcrypt.hash(password, 10);
     const account = new Account({
@@ -48,7 +49,7 @@ const dbCreateUser = async (userName: string, password: string, userRole: string
 const dbDeleteUser = async (userId: string): Promise<any> => {
   const resultNodes = await Account.find({ _id: userId }).exec();
   if (resultNodes[0].nodes.length > 0) {
-    throw new Error("User has running nodes");
+    throw new JSONRPCError("error", 420, "User has running nodes");
   }
   try {
     const result = await Account.findOneAndDelete({ _id: userId });
@@ -71,10 +72,10 @@ const dbUserLogin = async (userName: string, password: string): Promise<any> => 
         "enApi");
       return ({ status: "success", userName: result[0].userName, token, nodes: result[0].nodes });
     } else {
-      throw new Error("Auth Error");
+      throw new JSONRPCError("error", 420, "Auth Error");
     }
   } else {
-    throw new Error("Auth Error");
+    throw new JSONRPCError("error", 420, "Auth Error");
   }
 };
 const dbGetUser = async (userName: string): Promise<any> => {
