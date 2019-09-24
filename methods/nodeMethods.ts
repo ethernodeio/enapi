@@ -77,7 +77,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--verbosity=3",
     "--maxpeers=" + maxpeers,
     "--cache=2072",
-    "--lightserv=90",
+    "--lightserv=20",
     "--rpcvhosts=*",
   ];
 
