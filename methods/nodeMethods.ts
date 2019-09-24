@@ -43,13 +43,13 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         var wsPort: any = "disabled";
       }
 
-      const selected = [{
+      const selected = {
         containerID: data.Id,
         containerCreated: data.Created,
         containerState: data.State.Status,
         rpcPort,
         wsPort,
-      }];
+      };
       resolve(selected);
     });
   });
