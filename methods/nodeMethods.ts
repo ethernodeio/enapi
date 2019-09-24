@@ -1,4 +1,5 @@
 import { AddNode, RemoveNode, GetNodeContainerInfo } from "../__GENERATED_TYPES__/index.js";
+import { JSONRPCError } from "@open-rpc/server-js";
 import os from "os";
 import Account from "../models/account";
 import Docker from "dockerode";
@@ -30,7 +31,7 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
     docker.getContainer(containerId).inspect((err, data: { Id: string, Created: string, State: { Status: string }, NetworkSettings: { Ports: any } }) => {
       if (err) {
         console.log(err);
-        throw new Error(err);
+        throw new JSONRPCError("error: ", 420, err);
       }
       if (data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort) {
         var rpcPort = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
@@ -62,13 +63,13 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   const maxpeers = 25;
   const bootnodes = "";
   if (userName === "" || userName === undefined) {
-    throw new Error("Username Error");
+    throw new JSONRPCError("Username Error", 420);
   }
   if (nodeName === "" || nodeName === undefined) {
-    throw new Error("Nodename Error");
+    throw new JSONRPCError("Nodename Error", 420);
   }
   if (nodeNetwork === "" || nodeNetwork === undefined) {
-    throw new Error("Node Network Error");
+    throw new JSONRPCError("Node Network Error", 420);
   }
   const geth = [
     "geth",
@@ -169,20 +170,20 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     container.inspect(async (err: any, result: { Id: string; }) => {
       if (err) {
         console.log(err);
-        throw new Error(err);
+        throw new JSONRPCError("error", 420, err);
       }
       const dbAddNodeInfo = await Account.updateOne({ userName }, { $push: { nodes: { nodeId: result.Id, nodeName, nodeNetwork } } }).exec();
       console.log(dbAddNodeInfo);
       docker.getContainer(result.Id).start((error, containerResult) => {
         if (err) {
           console.log(error);
-          throw new Error(error);
+          throw new JSONRPCError("error", 420, error);
         }
       });
     });
   }).catch((error) => {
     console.log(error);
-    throw new Error(error);
+    throw new JSONRPCError("error", 420, error);
   });
   return { status: "success", message: "Stuff" };
 };
@@ -190,7 +191,7 @@ const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: str
   await docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
     if (err) {
       console.log(err);
-      throw new Error(err);
+      throw new JSONRPCError("error", 420, err);
     }
     if (removeNodeData === true) {
       console.log("removing node data from host");
@@ -198,7 +199,7 @@ const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: str
       exec("rm -rf " + dir, (error: any, stdout: any, stderr: any) => {
         if (error !== null) {
           console.log("exec error: " + error);
-          throw new Error(error);
+          throw new JSONRPCError("error", 420, error);
         }
         console.log("stdout: " + stdout);
         console.log("stderr: " + stderr);
