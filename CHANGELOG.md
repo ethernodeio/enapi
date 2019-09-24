@@ -1,3 +1,21 @@
+## [1.1.4](https://github.com/ethernodeio/enapi/compare/1.1.3...1.1.4) (2019-09-24)
+
+
+### Bug Fixes
+
+* added different sync types for multi-geth ([6de24b5](https://github.com/ethernodeio/enapi/commit/6de24b5))
+* added vhosts cors ([40afa20](https://github.com/ethernodeio/enapi/commit/40afa20))
+* changed server ports to accomidate jade-explorer ([1c0c26d](https://github.com/ethernodeio/enapi/commit/1c0c26d))
+* closing ipc connection to prevent mas xfile open error ([0e6a1c8](https://github.com/ethernodeio/enapi/commit/0e6a1c8))
+* contianer info returns object not array now ([55d03b9](https://github.com/ethernodeio/enapi/commit/55d03b9))
+* fixed node syncmodef flag to support all sync types ([db98880](https://github.com/ethernodeio/enapi/commit/db98880))
+* minor fixes to node docker container creation ([d49338a](https://github.com/ethernodeio/enapi/commit/d49338a))
+* small fixes to sync type select ([64c3677](https://github.com/ethernodeio/enapi/commit/64c3677))
+* small fixes to sync type select ([12074cc](https://github.com/ethernodeio/enapi/commit/12074cc))
+* small fixes to sync type select ([e6f7e03](https://github.com/ethernodeio/enapi/commit/e6f7e03))
+* testing new json rpc Error Stuff ([288a8b7](https://github.com/ethernodeio/enapi/commit/288a8b7))
+* updated account methods with new error handler ([3f57837](https://github.com/ethernodeio/enapi/commit/3f57837))
+
 ## [1.1.3](https://github.com/ethernodeio/enapi/compare/1.1.2...1.1.3) (2019-09-04)
 
 
