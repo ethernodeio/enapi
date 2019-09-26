@@ -33,17 +33,16 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         console.log(err);
         throw new JSONRPCError("error: ", 420, err);
       }
-      if (data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort) {
-        var rpcPort = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
-      } else {
+      if (data.NetworkSettings.Ports["8545/tcp"] === null) {
         var rpcPort: any = "disabled";
-      }
-      if (data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort) {
-        var wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
       } else {
-        var wsPort: any = "disabled";
+        var rpcPort = data.NetworkSettings.Ports["8545/tcp"]["0"].HostPort;
       }
-
+      if (data.NetworkSettings.Ports["8546/tcp"] === null) {
+        var wsPort: any = "disabled";
+      } else {
+        var wsPort: any = data.NetworkSettings.Ports["8546/tcp"]["0"].HostPort;
+      }
       const selected = {
         containerID: data.Id,
         containerCreated: data.Created,
@@ -82,6 +81,11 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--rpcvhosts=*",
   ];
 
+  let ports: any = {
+    "30303/tcp": [{ HostPort: "" }],
+    "30303/udp": [{ HostPort: "" }],
+  };
+
   if (nodeNetwork !== "ethnet") {
     geth.push("--" + nodeNetwork);
   }
@@ -102,16 +106,18 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--rpc");
     geth.push("--rpcaddr=0.0.0.0");
     geth.push("--rpccorsdomain=*");
+    ports.push('"8545/tcp": [{ HostPort: "" }]');
   }
   if (wsApi) {
     geth.push("--ws");
     geth.push("--wsaddr=0.0.0.0");
+    ports.push('"8546/tcp": [{ HostPort: "" }]');
     geth.push("--wsorigins=*");
   }
   if (cpu === "x64") {
     var dockerImage = "bakon3/multigethx86";
   } else if (cpu === "armhf") {
-    var dockerImage = "bakon3/multigetharmpi";
+    var dockerImage = "bakon3/multigetharmpib";
   } else if (cpu === "arm64") {
     var dockerImage = "bakon3/multigetharm";
   } else {
@@ -147,10 +153,8 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
         ipcPath,
       ],
       PortBindings: {
-        "8545/tcp": [{ HostPort: "" }],
-        "8546/tcp": [{ HostPort: "" }],
-        "30303/tcp": [{ HostPort: "" }],
-        "30303/udp": [{ HostPort: "" }],
+        ...ports,
+
       },
       RestartPolicy: {
         Name: "unless-stopped",
