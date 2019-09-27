@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/ethernodeio/enapi/compare/1.1.9...1.1.10) (2019-09-27)
+
+
+### Bug Fixes
+
+* update generator to 1.12 ([6fdad66](https://github.com/ethernodeio/enapi/commit/6fdad66))
+
 ## [1.1.9](https://github.com/ethernodeio/enapi/compare/1.1.8...1.1.9) (2019-09-27)
 
 
