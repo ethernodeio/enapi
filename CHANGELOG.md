@@ -1,3 +1,12 @@
+## [1.1.5](https://github.com/ethernodeio/enapi/compare/1.1.4...1.1.5) (2019-09-27)
+
+
+### Bug Fixes
+
+* fixed auto discovery for rpc end points during container creation ([ff8afb1](https://github.com/ethernodeio/enapi/commit/ff8afb1))
+* new client generator for onNotification option ([71f2571](https://github.com/ethernodeio/enapi/commit/71f2571))
+* removed closing IPC client for streams ([17cd6ec](https://github.com/ethernodeio/enapi/commit/17cd6ec))
+
 ## [1.1.4](https://github.com/ethernodeio/enapi/compare/1.1.3...1.1.4) (2019-09-24)
 
 
