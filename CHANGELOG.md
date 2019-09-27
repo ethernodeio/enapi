@@ -1,3 +1,11 @@
+## [1.1.9](https://github.com/ethernodeio/enapi/compare/1.1.8...1.1.9) (2019-09-27)
+
+
+### Bug Fixes
+
+* change ws port from conflict with DO ([521441f](https://github.com/ethernodeio/enapi/commit/521441f))
+* trying clinet gen 1.11 ([bb6fc4e](https://github.com/ethernodeio/enapi/commit/bb6fc4e))
+
 ## [1.1.8](https://github.com/ethernodeio/enapi/compare/1.1.7...1.1.8) (2019-09-27)
 
 
