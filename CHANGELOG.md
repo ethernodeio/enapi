@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/ethernodeio/enapi/compare/1.1.6...1.1.7) (2019-09-27)
+
+
+### Bug Fixes
+
+* testing differ client generator ([595f1ac](https://github.com/ethernodeio/enapi/commit/595f1ac))
+
 ## [1.1.6](https://github.com/ethernodeio/enapi/compare/1.1.5...1.1.6) (2019-09-27)
 
 
