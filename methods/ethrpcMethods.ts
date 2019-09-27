@@ -33,7 +33,7 @@ const makeRPCcall = async (userName: string, nodeName: string, nodeNetwork: stri
       resolve(result);
       console.log(result);
       // disable for streams or web sockets
-      client.end();
+      // client.end();
     });
     client.on("end", () => {
       console.log("Disconnected from node.");
