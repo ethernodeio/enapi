@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/ethernodeio/enapi/compare/1.1.5...1.1.6) (2019-09-27)
+
+
+### Bug Fixes
+
+* changes to deployment ([1f0ed7c](https://github.com/ethernodeio/enapi/commit/1f0ed7c))
+
 ## [1.1.5](https://github.com/ethernodeio/enapi/compare/1.1.4...1.1.5) (2019-09-27)
 
 
