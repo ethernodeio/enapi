@@ -1,3 +1,11 @@
+## [1.1.8](https://github.com/ethernodeio/enapi/compare/1.1.7...1.1.8) (2019-09-27)
+
+
+### Bug Fixes
+
+* downgraded client gen to 1.10 for debugging ([45958ff](https://github.com/ethernodeio/enapi/commit/45958ff))
+* downgraded client gen to 1.10 for debugging ([46bac62](https://github.com/ethernodeio/enapi/commit/46bac62))
+
 ## [1.1.7](https://github.com/ethernodeio/enapi/compare/1.1.6...1.1.7) (2019-09-27)
 
 
