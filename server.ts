@@ -35,7 +35,7 @@ const options = {
     },
     {
       type: "WebSocketTransport",
-      options: { port: 8422, middleware: [] } as IWebSocketServerTransportOptions,
+      options: { port: 8421, middleware: [] } as IWebSocketServerTransportOptions,
     },
   ],
   openrpcDocument: openrpcDocument as any,
