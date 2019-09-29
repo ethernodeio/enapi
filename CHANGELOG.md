@@ -1,3 +1,10 @@
+## [1.1.11](https://github.com/ethernodeio/enapi/compare/1.1.10...1.1.11) (2019-09-29)
+
+
+### Bug Fixes
+
+* lots of good shit ([07730c9](https://github.com/ethernodeio/enapi/commit/07730c9))
+
 ## [1.1.10](https://github.com/ethernodeio/enapi/compare/1.1.9...1.1.10) (2019-09-27)
 
 
