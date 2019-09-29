@@ -102,17 +102,17 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   if (bootnodes) {
     geth.push(bootnodes);
   }
-  if (rpcApi) {
+  if (rpcApi === true) {
     geth.push("--rpc");
     geth.push("--rpcaddr=0.0.0.0");
     geth.push("--rpccorsdomain=*");
     ports.push('"8545/tcp": [{ HostPort: "" }]');
   }
-  if (wsApi) {
+  if (wsApi === true) {
     geth.push("--ws");
     geth.push("--wsaddr=0.0.0.0");
-    ports.push('"8546/tcp": [{ HostPort: "" }]');
     geth.push("--wsorigins=*");
+    ports.push('"8546/tcp": [{ HostPort: "" }]');
   }
   if (cpu === "x64") {
     var dockerImage = "bakon3/multigethx86";
