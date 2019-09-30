@@ -18,6 +18,7 @@ console.log("enAPI Ready to start Blockchain Nodes");
 export const addNode: AddNode = async (JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi) => {
   await checkJWT(JWTtoken);
   const newNode = await dbCreateNode(JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi);
+  console.log(newNode);
   return newNode;
 };
 export const removeNode: RemoveNode = async (JWTtoken, userName, containerId, nodeName, removeNodeData) => {
@@ -80,12 +81,10 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     "--lightserv=20",
     "--rpcvhosts=*",
   ];
-
   let ports: any = {
     "30303/tcp": [{ HostPort: "" }],
     "30303/udp": [{ HostPort: "" }],
   };
-
   if (nodeNetwork !== "ethnet") {
     geth.push("--" + nodeNetwork);
   }
@@ -98,7 +97,6 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   } else {
     geth.push("--syncmode=" + syncType);
   }
-
   if (bootnodes) {
     geth.push(bootnodes);
   }
@@ -106,13 +104,13 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     geth.push("--rpc");
     geth.push("--rpcaddr=0.0.0.0");
     geth.push("--rpccorsdomain=*");
-    ports.push('"8545/tcp": [{ HostPort: "" }]');
+    ports = { ...ports, "8545/tcp": [{ HostPort: "" }] };
   }
   if (wsApi === true) {
     geth.push("--ws");
     geth.push("--wsaddr=0.0.0.0");
     geth.push("--wsorigins=*");
-    ports.push('"8546/tcp": [{ HostPort: "" }]');
+    ports = { ...ports, "8546/tcp": [{ HostPort: "" }] };
   }
   if (cpu === "x64") {
     var dockerImage = "bakon3/multigethx86";
@@ -189,7 +187,8 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     console.log(error);
     throw new JSONRPCError("error", 420, error);
   });
-  return { status: "success", message: "Stuff" };
+  console.log(createContainer);
+  return { status: "success", message: "Node Created" };
 };
 const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string, removeNodeData: boolean): Promise<any> => {
   await docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
