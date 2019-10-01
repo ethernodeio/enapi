@@ -51,7 +51,7 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         rpcPort,
         wsPort,
       };
-      resolve(data);
+      resolve(selected);
     });
   });
 };
