@@ -34,9 +34,6 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         console.log(err);
         throw new JSONRPCError("error: ", 420, err);
       }
-      console.log(data);
-
-      /*
       if (data.NetworkSettings.Ports["8545/tcp"] === null) {
         var rpcPort: any = "disabled";
       } else {
@@ -54,7 +51,6 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
         rpcPort,
         wsPort,
       };
-      */
       resolve(data);
     });
   });
