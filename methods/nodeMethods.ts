@@ -76,6 +76,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
     throw new JSONRPCError("Node Network Error", 420);
   }
   const geth = [
+    "geth",
     "--identity=" + userName + "-" + nodeName,
     "--shh",
     "--verbosity=3",
