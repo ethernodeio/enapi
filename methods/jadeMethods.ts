@@ -1,3 +1,4 @@
+import { } from "../__GENERATED_TYPES__/index.js";
 import { JSONRPCError } from "@open-rpc/server-js";
 // tslint:disable-next-line: no-var-requires
 const { ServiceRunner } = require("@etclabscore/jade-service-runner-client");
