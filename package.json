@@ -14,6 +14,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@etclabscore/jade-service-runner-client": "^1.5.0",
     "@open-rpc/meta-schema": "^1.5.3",
     "@open-rpc/server-js": "^1.5.0",
     "@types/dockerode": "^2.5.20",
