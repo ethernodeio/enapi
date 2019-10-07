@@ -6,6 +6,16 @@
 * added method to server ([a011d9d](https://github.com/ethernodeio/enapi/commit/a011d9d))
 * fixes and addons for jade-service-runner ([669dc68](https://github.com/ethernodeio/enapi/commit/669dc68))
 * release push ([bbd28d2](https://github.com/ethernodeio/enapi/commit/bbd28d2))
+* version fixing for npm ([8c66e77](https://github.com/ethernodeio/enapi/commit/8c66e77))
+
+## [1.2.1](https://github.com/ethernodeio/enapi/compare/1.2.0...1.2.1) (2019-10-07)
+
+
+### Bug Fixes
+
+* added method to server ([a011d9d](https://github.com/ethernodeio/enapi/commit/a011d9d))
+* fixes and addons for jade-service-runner ([669dc68](https://github.com/ethernodeio/enapi/commit/669dc68))
+* release push ([bbd28d2](https://github.com/ethernodeio/enapi/commit/bbd28d2))
 
 # [1.2.0](https://github.com/ethernodeio/enapi/compare/1.1.11...1.2.0) (2019-10-07)
 
