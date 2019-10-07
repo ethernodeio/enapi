@@ -1,4 +1,4 @@
-import { } from "../__GENERATED_TYPES__/index.js";
+import { InstallService, ListServices, ListInstalledServices, ListRunningServices, StartService } from "../__GENERATED_TYPES__/index.js";
 import { JSONRPCError } from "@open-rpc/server-js";
 // tslint:disable-next-line: no-var-requires
 const { ServiceRunner } = require("@etclabscore/jade-service-runner-client");
@@ -15,33 +15,26 @@ export const installService = async () => {
   if (successful === false) {
     throw new JSONRPCError("error: ", 420, "Service not installed");
   } else {
-    return successful;
+    return (successful);
   }
 };
 
-export const listServices = async () => {
-  const servicesAvailable = await serviceRunner.listServices("available");
-  const servicesRunning = await serviceRunner.listServices("running");
-  const servicesInstalled = await serviceRunner.listServices("installed");
-  return ({
-    "Services Availabe": servicesAvailable,
-    "Services Running": servicesRunning,
-    "Services Installed": servicesInstalled,
-  });
+export const listServices: ListServices = async (filter) => {
+  const slistServiceResult = await serviceRunner.listServices(filter);
+  return (slistServiceResult);
 };
 
-export const listInstalledServices = async () => {
+export const listInstalledServices: ListInstalledServices = async () => {
   const servicesInstalled = await serviceRunner.listServices("installed");
   return (servicesInstalled);
 };
 
-export const listRunningServices = async () => {
-  const servicesRunning = await serviceRunner.listServices("running");
-  return ("servicesRunning");
+export const listRunningServices: ListRunningServices = async () => {
+  const servicesRunningResult = await serviceRunner.listServices("running");
+  return (servicesRunningResult);
 };
 
-export const startService = async () => {
-  const serviceName = "multi-geth";
-  const serviceConfig = serviceRunner.start(serviceName, "kotti");
-  const erpc = new ERPC(serviceConfig);
+export const startService: StartService = async (serviceName, serviceEnv) => {
+  const startServiceResult = serviceRunner.start(serviceName, serviceEnv);
+  return (startServiceResult);
 };
