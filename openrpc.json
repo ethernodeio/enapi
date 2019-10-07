@@ -796,9 +796,261 @@
           }
         }
       ]
+    },
+    {
+      "name": "installService",
+      "params": [
+        {
+          "name": "serviceName",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        {
+          "name": "version",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "installSuccess",
+        "schema": {
+          "type": "boolean"
+        }
+      }
+    },
+    {
+      "name": "listServices",
+      "params": [
+        {
+          "name": "filter",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "all",
+              "running",
+              "available",
+              "installed"
+            ]
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "listedServices",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "enviornments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string",
+                "enum": [
+                  "active",
+                  "available",
+                  "installed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "listInstalledServices",
+      "params": [],
+      "result": {
+        "name": "installedServices",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "listRunningServices",
+      "params": [],
+      "result": {
+        "name": "runningServices",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Service"
+          }
+        }
+      }
+    },
+    {
+      "name": "startService",
+      "params": [
+        {
+          "name": "name",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        {
+          "name": "version",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        },
+        {
+          "name": "environment",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "serviceConfig",
+        "schema": {
+          "$ref": "#/components/schemas/Service"
+        },
+        "required": true
+      }
     }
   ],
   "components": {
+    "schemas": {
+      "StringArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "SeqCommand": {
+        "type": "object",
+        "properties": {
+          "cmd": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "cmd",
+          "args"
+        ]
+      },
+      "EnvArgs": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "$ref": "#/components/schemas/StringArray"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/StringArray"
+          },
+          "teardown": {
+            "$ref": "#/components/schemas/StringArray"
+          }
+        },
+        "required": [
+          "start",
+          "stop",
+          "teardown"
+        ]
+      },
+      "Commands": {
+        "type": "object",
+        "properties": {
+          "setup": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeqCommand"
+            }
+          },
+          "start": {
+            "type": "string"
+          },
+          "stop": {
+            "type": "string"
+          },
+          "teardown": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "setup",
+          "start",
+          "stop",
+          "teardown"
+        ]
+      },
+      "Service": {
+        "description": "An object that describes an instance of a service",
+        "type": "object",
+        "properties": {
+          "env": {
+            "type": "string"
+          },
+          "rpcPort": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "commands": {
+            "$ref": "#/components/schemas/Commands"
+          },
+          "args": {
+            "$ref": "#/components/schemas/EnvArgs"
+          },
+          "state": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "env",
+          "rpcPort",
+          "name",
+          "version",
+          "path",
+          "commands",
+          "args",
+          "running"
+        ]
+      }
+    },
     "contentDescriptors": {
       "userId": {
         "name": "userId",
