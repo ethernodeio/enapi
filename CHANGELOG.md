@@ -1,3 +1,25 @@
+# [1.2.0](https://github.com/ethernodeio/enapi/compare/1.1.11...1.2.0) (2019-10-07)
+
+
+### Bug Fixes
+
+* added @etclabscore/ethereum-json-rpc lib ([1e39b96](https://github.com/ethernodeio/enapi/commit/1e39b96))
+* added service runner spec to openrpc json ([555b4a5](https://github.com/ethernodeio/enapi/commit/555b4a5))
+* adpated to native multigeth dockerfile ([e1f3c38](https://github.com/ethernodeio/enapi/commit/e1f3c38))
+* debug enable rpc stuff ([3cfc736](https://github.com/ethernodeio/enapi/commit/3cfc736))
+* fixed entry point for geth ([8c59b0b](https://github.com/ethernodeio/enapi/commit/8c59b0b))
+* fixes for services runner api methods ([78cae58](https://github.com/ethernodeio/enapi/commit/78cae58))
+* geth entry point ([8b96669](https://github.com/ethernodeio/enapi/commit/8b96669))
+* proper container info ([c5cc5f4](https://github.com/ethernodeio/enapi/commit/c5cc5f4))
+* solved bug when creating node and adding rpc endpoints ([d03e306](https://github.com/ethernodeio/enapi/commit/d03e306))
+* testing initial jade service runner on ethernode ([10228e1](https://github.com/ethernodeio/enapi/commit/10228e1))
+* testing port bug ([8709715](https://github.com/ethernodeio/enapi/commit/8709715))
+
+
+### Features
+
+* added jade service runner ([a280920](https://github.com/ethernodeio/enapi/commit/a280920))
+
 ## [1.1.11](https://github.com/ethernodeio/enapi/compare/1.1.10...1.1.11) (2019-09-29)
 
 
