@@ -20,15 +20,24 @@ export const installService = async () => {
 };
 
 export const listServices = async () => {
-  return ("Listing Services");
+  const servicesAvailable = await serviceRunner.listServices("available");
+  const servicesRunning = await serviceRunner.listServices("running");
+  const servicesInstalled = await serviceRunner.listServices("installed");
+  return ({
+    "Services Availabe": servicesAvailable,
+    "Services Running": servicesRunning,
+    "Services Installed": servicesInstalled,
+  });
 };
 
 export const listInstalledServices = async () => {
-  return ("Installed Services");
+  const servicesInstalled = await serviceRunner.listServices("installed");
+  return (servicesInstalled);
 };
 
 export const listRunningServices = async () => {
-  return ("listing running services");
+  const servicesRunning = await serviceRunner.listServices("running");
+  return ("servicesRunning");
 };
 
 export const startService = async () => {
