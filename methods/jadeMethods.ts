@@ -9,19 +9,14 @@ const serviceRunner = new ServiceRunner({ transport: { type: "http", port: 8002,
 // #######################################
 //          ####NODE METHODS ####
 // #######################################
-export const installService = async () => {
-  const serviceName = "multi-geth";
-  const successful = await serviceRunner.installService(serviceName);
-  if (successful === false) {
-    throw new JSONRPCError("error: ", 420, "Service not installed");
-  } else {
-    return (successful);
-  }
-};
+export const installService: InstallService = async (serviceName, serviceVersion) => {
+  const installServicesResult = await serviceRunner.installService(serviceName, serviceVersion);
+  return (installServicesResult);
+}
 
 export const listServices: ListServices = async (filter) => {
-  const slistServiceResult = await serviceRunner.listServices(filter);
-  return (slistServiceResult);
+  const listServiceResult = await serviceRunner.listServices(filter);
+  return (listServiceResult);
 };
 
 export const listInstalledServices: ListInstalledServices = async () => {
@@ -34,7 +29,7 @@ export const listRunningServices: ListRunningServices = async () => {
   return (servicesRunningResult);
 };
 
-export const startService: StartService = async (serviceName, serviceEnv) => {
-  const startServiceResult = serviceRunner.start(serviceName, serviceEnv);
+export const startService: StartService = async (serviceName, serviceVersion, serviceEnv) => {
+  const startServiceResult = serviceRunner.start(serviceName, serviceVersion, serviceEnv);
   return (startServiceResult);
 };
