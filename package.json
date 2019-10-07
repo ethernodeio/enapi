@@ -1,6 +1,6 @@
 {
   "name": "@ethernodeio/enapi",
-  "version": "1.2.0",
+  "version": "1.2.3",
   "description": "enAPI Ethereum node managment API",
   "main": "build/server.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "npm run typings && npm run lint && jest --coverage --passWithNoTests",
     "typings": "open-rpc-typings --output-ts __GENERATED_TYPES__"
   },
-  "author": "",
+  "author": "bakon",
   "license": "Apache-2.0",
   "dependencies": {
     "@etclabscore/ethereum-json-rpc": "^1.2.2",
