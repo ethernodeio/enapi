@@ -11,7 +11,7 @@ const serviceRunner = new ServiceRunner({ transport: { type: "http", port: 8002,
 export const installService: InstallService = async (serviceName, serviceVersion) => {
   const installServicesResult = await serviceRunner.installService(serviceName, serviceVersion);
   return (installServicesResult);
-}
+};
 
 export const listServices: ListServices = async (filter) => {
   const listServiceResult = await serviceRunner.listServices(filter);
