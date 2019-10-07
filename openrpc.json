@@ -1,7 +1,7 @@
 {
   "openrpc": "1.0.0",
   "info": {
-    "version": "1.2.1",
+    "version": "1.2.2",
     "title": "enAPI OpenRPC json-rpc API",
     "description": "EnAPI backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
