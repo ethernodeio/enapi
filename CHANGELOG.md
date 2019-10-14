@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/ethernodeio/enapi/compare/1.2.1...1.2.2) (2019-10-14)
+
+
+### Bug Fixes
+
+* getting version numbers equal with enui ([7959594](https://github.com/ethernodeio/enapi/commit/7959594))
+
 ## [1.2.1](https://github.com/ethernodeio/enapi/compare/1.2.0...1.2.1) (2019-10-07)
 
 
