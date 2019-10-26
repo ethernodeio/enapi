@@ -61,7 +61,7 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
 const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string, nodeNetwork: string, syncType: string, rpcApi: boolean, wsApi: boolean): Promise<any> => {
   const swap = ram * 2;
   const maxpeers = 25;
-  const bootnodes = "enode://c64a2a9f8a0019ff8fecbd843eaeae47da3024338290f63aea02b3f8a9222a7eb56a019cea64045a64b38332c6d1477bf606a9f6105e097673ee2becfd1da741@144.202.98.176:42000";
+  const bootnodes = "";
   if (userName === "" || userName === undefined) {
     throw new JSONRPCError("Username Error", 420);
   }
