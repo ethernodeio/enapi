@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/ethernodeio/enapi/compare/1.2.2...1.2.3) (2019-10-27)
+
+
+### Bug Fixes
+
+* added system info method ([d885aea](https://github.com/ethernodeio/enapi/commit/d885aea))
+* concurent release with ui ([f15bf10](https://github.com/ethernodeio/enapi/commit/f15bf10))
+
 ## [1.2.2](https://github.com/ethernodeio/enapi/compare/1.2.1...1.2.2) (2019-10-27)
 
 
