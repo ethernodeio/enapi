@@ -8,6 +8,7 @@ import { addNode, removeNode, getNodeContainerInfo } from "./methods/nodeMethods
 import { sol_compile } from "./methods/solidityMethods";
 import { ethRpcCall } from "./methods/ethrpcMethods";
 import { installService, listServices, listInstalledServices, listRunningServices, startService } from "./methods/jadeMethods";
+import { getSysInfo } from "./methods/sysMethods";
 import mongoose from "mongoose";
 
 mongoose.connect("mongodb://localhost/enapi", { useNewUrlParser: true });
@@ -27,6 +28,7 @@ const methods = {
   listInstalledServices,
   listRunningServices,
   startService,
+  getSysInfo,
 };
 
 const router = new Router(openrpcDocument as any, methods);
