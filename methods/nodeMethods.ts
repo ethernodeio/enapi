@@ -5,22 +5,23 @@ import Account from "../models/account";
 import Docker from "dockerode";
 import { exec } from "child_process";
 import { checkJWT } from "../middleware/checkauth";
-const docker = new Docker({ socketPath: "/var/run/docker.sock" });
 const cpu = os.arch();
 const ram = os.totalmem();
+
+const docker = new Docker({ socketPath: "/var/run/docker.sock" });
 
 // #######################################
 //          ####NODE METHODS ####
 // #######################################
 export const addNode: AddNode = async (JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi) => {
   await checkJWT(JWTtoken);
-  const newNode = await dbCreateNode(JWTtoken, userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi);
+  const newNode = await dbCreateNode(userName, nodeName, nodeNetwork, syncType, rpcApi, wsApi);
   console.log(newNode);
   return newNode;
 };
 export const removeNode: RemoveNode = async (JWTtoken, userName, containerId, nodeName, removeNodeData) => {
   await checkJWT(JWTtoken);
-  const removeContainer = await dbRemoveNode(JWTtoken, userName, containerId, nodeName, removeNodeData);
+  const removeContainer = await dbRemoveNode(userName, containerId, nodeName, removeNodeData);
   return removeContainer;
 };
 export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, containerId): Promise<any> => {
@@ -55,7 +56,7 @@ export const getNodeContainerInfo: GetNodeContainerInfo = async (JWTtoken, conta
 // #######################################
 //   ####MODELS FOR NODE METHODS ####
 // #######################################
-const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string, nodeNetwork: string, syncType: string, rpcApi: boolean, wsApi: boolean): Promise<any> => {
+const dbCreateNode = async (userName: string, nodeName: string, nodeNetwork: string, syncType: string, rpcApi: boolean, wsApi: boolean): Promise<any> => {
   const swap = ram * 2;
   const maxpeers = 25;
   const bootnodes = "";
@@ -185,7 +186,7 @@ const dbCreateNode = async (JWTtoken: string, userName: string, nodeName: string
   console.log(createContainer);
   return { status: "success", message: "Node Created" };
 };
-const dbRemoveNode = async (JWTtoken: string, userName: string, containerId: string, nodeName: string, removeNodeData: boolean): Promise<any> => {
+const dbRemoveNode = async (userName: string, containerId: string, nodeName: string, removeNodeData: boolean): Promise<any> => {
   await docker.getContainer(containerId).remove({ force: true }, async (err, data) => {
     if (err) {
       console.log(err);
