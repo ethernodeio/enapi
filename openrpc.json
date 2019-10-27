@@ -1,7 +1,7 @@
 {
   "openrpc": "1.0.0",
   "info": {
-    "version": "1.1.1",
+    "version": "1.2.2",
     "title": "enAPI OpenRPC json-rpc API",
     "description": "EnAPI backend based on OpenRPC",
     "termsOfService": "https://ethernode.io/terms/",
@@ -26,6 +26,73 @@
     }
   ],
   "methods": [
+    {
+      "name": "getSysInfo",
+      "description": "Gets System Info",
+      "params": [
+        {
+          "$ref": "#/components/contentDescriptors/JWTtoken"
+        }
+      ],
+      "result": {
+        "name": "getSysInfo",
+        "description": "Returns System Info",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "description": "Returns system info"
+            },
+            "message": {
+              "type": "string",
+              "description": "returns system info"
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": 250,
+          "data": [],
+          "message": "System broken"
+        }
+      ],
+      "examples": [
+        {
+          "name": "getSysInfoExample",
+          "description": "example of system info",
+          "params": [
+            {
+              "$ref": "#/components/examples/JWTtoken"
+            }
+          ],
+          "result": {
+            "name": "getSysInfo",
+            "value": {
+              "status": "System",
+              "message": "Your ram is here"
+            }
+          }
+        },
+        {
+          "name": "getSysInfoExample",
+          "description": "example of getSysInfo",
+          "params": [
+            {
+              "$ref": "#/components/examples/JWTtoken"
+            }
+          ],
+          "result": {
+            "name": "error",
+            "value": {
+              "status": "error",
+              "message": "System has no system"
+            }
+          }
+        }
+      ]
+    },
     {
       "name": "createUser",
       "description": "Creates a new user in the system. Duplicates are not allowed, first user is admin",
