@@ -5,6 +5,17 @@
 
 * added new sys info method ([447668b](https://github.com/ethernodeio/enapi/commit/447668b))
 * fixed enode error ([e9b62f9](https://github.com/ethernodeio/enapi/commit/e9b62f9))
+* fixed version number for release ([6936bd2](https://github.com/ethernodeio/enapi/commit/6936bd2))
+* getting version numbers equal with enui ([7959594](https://github.com/ethernodeio/enapi/commit/7959594))
+* removed light server stuff ([082bd63](https://github.com/ethernodeio/enapi/commit/082bd63))
+
+## [1.2.2](https://github.com/ethernodeio/enapi/compare/1.2.1...1.2.2) (2019-10-27)
+
+
+### Bug Fixes
+
+* added new sys info method ([447668b](https://github.com/ethernodeio/enapi/commit/447668b))
+* fixed enode error ([e9b62f9](https://github.com/ethernodeio/enapi/commit/e9b62f9))
 * getting version numbers equal with enui ([7959594](https://github.com/ethernodeio/enapi/commit/7959594))
 * removed light server stuff ([082bd63](https://github.com/ethernodeio/enapi/commit/082bd63))
 
