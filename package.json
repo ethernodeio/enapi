@@ -23,7 +23,7 @@
     "cors": "^2.8.5",
     "dockerode": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.3",
+    "mongoose": "^5.7.5",
     "semantic-release": "^15.13.24"
   },
   "devDependencies": {
