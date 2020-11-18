@@ -24,7 +24,7 @@
     "dockerode": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.3",
-    "semantic-release": "^15.13.24"
+    "semantic-release": "^17.2.3"
   },
   "devDependencies": {
     "@open-rpc/generator-client": "^1.12.2",
